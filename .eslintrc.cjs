@@ -25,6 +25,7 @@ module.exports = {
   },
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    "@typescript-eslint/consistent-type-definitions": "off",
     '@typescript-eslint/explicit-function-return-type': 'off',
     // 같은 폴더인 경우를 제외하고 import 경로는 항상 절대 경로를 사용
     'no-relative-import-paths/no-relative-import-paths': [
@@ -111,6 +112,7 @@ module.exports = {
     'react/no-unknown-property': 'off',
     // 정의한 props 중에 빠진게 있는지 체크 (NextPage 등 일부 추상화 컴포넌트에서 복잡해지므로 기본은 off)
     'react/prop-types': 'off',
+    // interface 사용 불가
   },
   parserOptions: {
     project: true,
