@@ -1,5 +1,5 @@
 {
-  "name": "react-vite-yarn-boilerplate",
+  "name": "print-studio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sass": "^1.77.4"
   },
   "devDependencies": {
     "@rushstack/eslint-config": "^3.6.10",
