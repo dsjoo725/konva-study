@@ -29,28 +29,18 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
           <BoundingBox key={index} boundingBox={boundingBox} scale={scale} />
         ))}
         {boundingBoxes[0] && (
-          <>
-            <Anchor name="top-left" x={boundingBoxes[0].x} y={boundingBoxes[0].y} scale={scale} />
-            <Anchor
-              name="top-right"
-              x={boundingBoxes[0].x + boundingBoxes[0].width}
-              y={boundingBoxes[0].y}
-              scale={scale}
-            />
-            <Anchor
-              name="bottom-left"
-              x={boundingBoxes[0].x}
-              y={boundingBoxes[0].y + boundingBoxes[0].height}
-              scale={scale}
-            />
+          <Group x={boundingBoxes[0].x} y={boundingBoxes[0].y} rotation={boundingBoxes[0].rotation}>
+            <Anchor name="top-left" x={0} y={0} scale={scale} />
+            <Anchor name="top-right" x={boundingBoxes[0].width} y={0} scale={scale} />
+            <Anchor name="bottom-left" x={0} y={boundingBoxes[0].height} scale={scale} />
             <Anchor
               name="bottom-right"
-              x={boundingBoxes[0].x + boundingBoxes[0].width}
-              y={boundingBoxes[0].y + boundingBoxes[0].height}
+              x={boundingBoxes[0].width}
+              y={boundingBoxes[0].height}
               scale={scale}
             />
             <Rotater boundingBox={boundingBoxes[0]} scale={scale} />
-          </>
+          </Group>
         )}
       </Group>
     </Layer>

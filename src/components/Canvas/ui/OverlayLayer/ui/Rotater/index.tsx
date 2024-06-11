@@ -18,26 +18,18 @@ const Rotater = ({ boundingBox, scale }: Props) => {
   imgRef.current.src = '/rotater.svg';
 
   return (
-    <Group
-      name="rotater-anchor"
-      x={boundingBox.x + boundingBox.width / 2}
-      y={boundingBox.y + boundingBox.height / 2}
-      offsetX={boundingBox.width / 2}
-      offsetY={boundingBox.height / 2}
-      rotation={boundingBox.rotation}
+    <Image
+      name="rotation-anchor"
+      image={imgRef.current}
+      x={boundingBox.width / 2}
+      y={boundingBox.height + (ROTATION_ANCHOR_SIZE / 2 + ROTATION_ANCHOR_OFFSET) / scale}
+      scaleX={1 / scale}
+      scaleY={1 / scale}
+      offsetX={ROTATION_ANCHOR_SIZE / 2}
+      offsetY={ROTATION_ANCHOR_SIZE / 2}
       draggable
       onDragMove={handleDragMove}
-    >
-      <Image
-        image={imgRef.current}
-        x={boundingBox.width / 2}
-        y={boundingBox.height + (ROTATION_ANCHOR_SIZE / 2 + ROTATION_ANCHOR_OFFSET) / scale}
-        scaleX={1 / scale}
-        scaleY={1 / scale}
-        offsetX={ROTATION_ANCHOR_SIZE / 2}
-        offsetY={ROTATION_ANCHOR_SIZE / 2}
-      />
-    </Group>
+    />
   );
 };
 

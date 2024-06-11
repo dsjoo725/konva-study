@@ -12,6 +12,7 @@ const BoundingBox = ({ boundingBox, scale }: Props) => {
       y={boundingBox.y}
       width={boundingBox.width}
       height={boundingBox.height}
+      rotation={boundingBox.rotation}
       stroke={'rgba(247, 107, 21, 1)'}
       strokeWidth={2 / scale}
     />

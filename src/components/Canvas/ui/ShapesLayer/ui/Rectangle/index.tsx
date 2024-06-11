@@ -12,6 +12,8 @@ const Rectangle = ({ rectangle }: Props) => {
   return (
     <Rect
       {...rectangle}
+      offsetX={rectangle.width / 2}
+      offsetY={rectangle.height / 2}
       draggable
       onDragEnd={handleDragEnd(rectangle.id)}
       onClick={handleClick(rectangle.id)}
