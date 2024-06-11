@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Group, Image } from 'react-konva';
+import { Image } from 'react-konva';
 
 import { BoundingBox } from '@/shared/design/type';
 import { useHandleRotater } from './hooks/useHandleRotater';
