@@ -11,6 +11,25 @@ import {
 import { BoundingBox } from '@/shared/design/type';
 import { degToRad } from '@/shared/@common/utils/math';
 
+/**
+ * @name calculateBoundingBox
+ * @description
+ * 주어진 점들과 회전 각도를 이용하여 바운딩 박스를 계산합니다.
+ * ```typescript
+ * calculateBoundingBox(
+ *   // 2D 벡터로 이루어진 점들의 배열
+ *   points: Vector2d[],
+ *   // 회전 각도 (도 단위)
+ *   rotation: number
+ * ): { x: number, y: number, width: number, height: number, rotation: number }
+ * ```
+ * @example
+ * calculateBoundingBox(
+ *   [{ x: 1, y: 2 }, { x: 3, y: 4 }, { x: 5, y: 6 }],
+ *   0
+ * )
+ * // { x: 1, y: 2, width: 4, height: 4, rotation: 0 }
+ */
 const calculateBoundingBox = (points: Vector2d[], rotation: number) => {
   const transform = new Transform();
   transform.rotate(-degToRad(rotation));
