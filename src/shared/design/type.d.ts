@@ -3,6 +3,7 @@ export type BaseShape = {
   type: ShapeType;
   x: number;
   y: number;
+  rotation: number;
 };
 
 export type ShapeType = 'rectangle' | 'circle';
@@ -34,4 +35,5 @@ export type BoundingBox = {
   y: number;
   width: number;
   height: number;
+  rotation: number;
 };

@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import { Image } from 'react-konva';
+import { Group, Image } from 'react-konva';
 
 import { BoundingBox } from '@/shared/design/type';
 import { useHandleRotater } from './hooks/useHandleRotater';
 
 const ROTATION_ANCHOR_OFFSET: number = 12;
+const ROTATION_ANCHOR_SIZE: number = 28;
 
 interface Props {
   boundingBox: BoundingBox;
@@ -17,22 +18,26 @@ const Rotater = ({ boundingBox, scale }: Props) => {
   imgRef.current.src = '/rotater.svg';
 
   return (
-    <Image
+    <Group
       name="rotater-anchor"
-      image={imgRef.current}
       x={boundingBox.x + boundingBox.width / 2}
-      y={
-        boundingBox.y +
-        boundingBox.height +
-        (imgRef.current.height / 2 + ROTATION_ANCHOR_OFFSET) / scale
-      }
-      scaleX={1 / scale}
-      scaleY={1 / scale}
-      offsetX={imgRef.current.width / 2}
-      offsetY={imgRef.current.height / 2}
+      y={boundingBox.y + boundingBox.height / 2}
+      offsetX={boundingBox.width / 2}
+      offsetY={boundingBox.height / 2}
+      rotation={boundingBox.rotation}
       draggable
       onDragMove={handleDragMove}
-    />
+    >
+      <Image
+        image={imgRef.current}
+        x={boundingBox.width / 2}
+        y={boundingBox.height + (ROTATION_ANCHOR_SIZE / 2 + ROTATION_ANCHOR_OFFSET) / scale}
+        scaleX={1 / scale}
+        scaleY={1 / scale}
+        offsetX={ROTATION_ANCHOR_SIZE / 2}
+        offsetY={ROTATION_ANCHOR_SIZE / 2}
+      />
+    </Group>
   );
 };
 

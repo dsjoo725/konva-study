@@ -3,6 +3,7 @@ import {
   useDesignBoundingBoxes,
   useDesignSelectedIds,
 } from '@/shared/design/store';
+import { BoundingBox } from '@/shared/design/type';
 
 import Konva from 'konva';
 import { useEffect, useRef } from 'react';
@@ -26,13 +27,14 @@ export const useUpdateBoundingBoxes = (
       .map((id) => stageRef.current!.findOne(`#${id}`))
       .filter((node): node is Konva.Shape => node instanceof Konva.Shape);
 
-    const clientRects = selectedShapes.current.map((shape) => {
+    const clientRects: BoundingBox[] = selectedShapes.current.map((shape) => {
       const rect = shape.getClientRect();
       return {
         x: rect.x / scale - x,
         y: rect.y / scale - y,
         width: rect.width / scale,
         height: rect.height / scale,
+        rotation: shape.rotation(),
       };
     });
 
@@ -50,11 +52,12 @@ export const useUpdateBoundingBoxes = (
     const yMin = Math.min(...clientRects.map((rect) => rect.y));
     const xMax = Math.max(...clientRects.map((rect) => rect.x + rect.width));
     const yMax = Math.max(...clientRects.map((rect) => rect.y + rect.height));
-    const combineClientRect = {
+    const combineClientRect: BoundingBox = {
       x: xMin,
       y: yMin,
       width: xMax - xMin,
       height: yMax - yMin,
+      rotation: 0,
     };
     updateBoundingBoxes([combineClientRect, ...clientRects]);
   }, [scale, selectedIDs, stageRef, updateBoundingBoxes, x, y]);

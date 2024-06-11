@@ -3,6 +3,7 @@ import { KonvaEventObject } from 'konva/lib/Node';
 export const useHandleAnchor = () => {
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const anchorName = e.target.name();
+
     const topLeft = e.target.getParent()?.findOne('.top-left-anchor');
     const bottomRight = e.target.getParent()?.findOne('.bottom-right-anchor');
 
@@ -17,14 +18,6 @@ export const useHandleAnchor = () => {
         topLeft.x(e.target.x());
         bottomRight.y(e.target.y());
     }
-
-    const newBoundingBox = {
-      x: topLeft.x(),
-      y: topLeft.y(),
-      width: bottomRight.x() - topLeft.x(),
-      height: bottomRight.y() - topLeft.y(),
-    };
-    console.log(newBoundingBox);
   };
 
   return { handleDragMove };
