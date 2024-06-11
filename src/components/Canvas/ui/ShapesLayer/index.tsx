@@ -13,7 +13,7 @@ const ShapesLayer = ({ x, y }: Props) => {
   const shapes = useDesignShapes();
 
   return (
-    <Layer x={x} y={y}>
+    <Layer name="shape-layer" x={x} y={y}>
       {shapes.map((shape) => {
         switch (shape.type) {
           case 'rectangle':

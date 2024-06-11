@@ -2,10 +2,17 @@ import { MutableRefObject, useRef } from 'react';
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
 import { KonvaEventObject } from 'konva/lib/Node';
-import { useDesignActions } from '@/shared/design/store';
+import { useDesignActions, useDesignSelectedIds } from '@/shared/design/store';
 
 export const useHandleBoundingBoxes = (selectedShapes: MutableRefObject<Konva.Shape[]>) => {
-  const { updateBoundingBoxesPosition, updateSelectedShapesPosition } = useDesignActions();
+  const {
+    updateSelectedIds,
+    addSelectedIds,
+    deleteSelectedIds,
+    updateBoundingBoxesPosition,
+    updateSelectedShapesPosition,
+  } = useDesignActions();
+  const selectedIDs = useDesignSelectedIds();
   const startPoints = useRef<Vector2d | null>(null);
 
   const handleDragStart = (e: KonvaEventObject<DragEvent>) => {
@@ -45,5 +52,36 @@ export const useHandleBoundingBoxes = (selectedShapes: MutableRefObject<Konva.Sh
     e.target.y(0);
   };
 
-  return { handleDragStart, handleDragMove, handleDragEnd };
+  const handleClick = (e: KonvaEventObject<DragEvent>) => {
+    const stage = e.target.getStage();
+    const pointerPosition = stage?.getPointerPosition();
+    const shapeLayer = stage?.findOne('.shape-layer');
+
+    if (!pointerPosition || !(shapeLayer instanceof Konva.Layer)) return;
+
+    const { x, y } = pointerPosition;
+    const targetShape = shapeLayer.getIntersection({ x, y });
+
+    if (!targetShape) return;
+
+    const targetShapeId = targetShape.id();
+    const isShapeSelected = selectedIDs.includes(targetShapeId);
+    const isCtrlOrShiftPressed = e.evt.ctrlKey || e.evt.shiftKey;
+
+    if (isShapeSelected) {
+      if (isCtrlOrShiftPressed) {
+        deleteSelectedIds([targetShapeId]);
+      } else if (selectedIDs.length > 1) {
+        updateSelectedIds([targetShapeId]);
+      }
+    } else {
+      if (isCtrlOrShiftPressed) {
+        addSelectedIds([targetShapeId]);
+      } else {
+        updateSelectedIds([targetShapeId]);
+      }
+    }
+  };
+
+  return { handleDragStart, handleDragMove, handleDragEnd, handleClick };
 };

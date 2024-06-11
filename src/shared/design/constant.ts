@@ -8,7 +8,7 @@ export const DEFAULT_RECTANGLE_CONFIG: RectangleConfig = {
   stroke: 'black',
   strokeWidth: 4,
   fill: 'white',
-  rotation: 90,
+  rotation: 45,
 };
 
 export const DEFAULT_CIRCLE_CONFIG: CircleConfig = {

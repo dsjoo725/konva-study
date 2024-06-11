@@ -9,6 +9,7 @@ export type DesignStore = {
     addShapes: (shapes: Shape[]) => void;
     updateShapePosition: (id: string, x: number, y: number) => void;
     addSelectedIds: (ids: string[]) => void;
+    deleteSelectedIds: (ids: string[]) => void;
     updateSelectedIds: (ids: string[]) => void;
     updateBoundingBoxes: (boundingBoxes: BoundingBox[]) => void;
     updateBoundingBoxesPosition: (deltaX: number, deltaY: number) => void;
@@ -30,12 +31,15 @@ const useDesignStore = createStore<DesignStore>((set) => ({
         shapes: state.shapes.map((shape) => (shape.id === id ? { ...shape, x, y } : shape)),
       })),
 
+    updateSelectedIds: (ids) => set(() => ({ selectedIds: ids })),
     addSelectedIds: (ids) =>
       set((state) => ({
         selectedIds: [...state.selectedIds, ...ids.filter((id) => !state.selectedIds.includes(id))],
       })),
-
-    updateSelectedIds: (ids) => set(() => ({ selectedIds: ids })),
+    deleteSelectedIds: (ids) =>
+      set((state) => ({
+        selectedIds: state.selectedIds.filter((id) => !ids.includes(id)),
+      })),
 
     updateBoundingBoxes: (boundingBoxes) => set(() => ({ boundingBoxes })),
 

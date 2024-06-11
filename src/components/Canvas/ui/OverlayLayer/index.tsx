@@ -15,7 +15,8 @@ interface Props {
 }
 const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
   const { boundingBoxes, selectedShapes } = useUpdateBoundingBoxes(stageRef, x, y, scale);
-  const { handleDragStart, handleDragMove, handleDragEnd } = useHandleBoundingBoxes(selectedShapes);
+  const { handleDragStart, handleDragMove, handleDragEnd, handleClick } =
+    useHandleBoundingBoxes(selectedShapes);
 
   return (
     <Layer x={x} y={y}>
@@ -24,6 +25,7 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
         onDragStart={handleDragStart}
         onDragMove={handleDragMove}
         onDragEnd={handleDragEnd}
+        onClick={handleClick}
       >
         {boundingBoxes.map((boundingBox, index) => (
           <BoundingBox key={index} boundingBox={boundingBox} scale={scale} />
