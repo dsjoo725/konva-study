@@ -1,6 +1,6 @@
 import { Ellipse } from 'react-konva';
 
-import { useHandleShape } from '@/shared/design/hooks';
+import { useHandleShape } from '@/shared/design/hooks/useHandleShape';
 import { CircleShape } from '@/shared/design/type';
 
 interface Props {

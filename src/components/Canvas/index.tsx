@@ -10,6 +10,7 @@ import OverlayLayer from './ui/OverlayLayer';
 const Canvas = () => {
   const { containerRef, dimensions } = useContainerDimensions();
   const stageRef = useRef<Konva.Stage>(null);
+  const scale = 0.8;
 
   return (
     <div className={styles.layout} ref={containerRef}>
@@ -17,11 +18,11 @@ const Canvas = () => {
         ref={stageRef}
         width={dimensions.width}
         height={dimensions.height}
-        scaleX={0.5}
-        scaleY={0.5}
+        scaleX={scale}
+        scaleY={scale}
       >
         <ShapesLayer x={100} y={100} />
-        <OverlayLayer stageRef={stageRef} x={100} y={100} scale={0.5} />
+        <OverlayLayer stageRef={stageRef} x={100} y={100} scale={scale} />
       </Stage>
     </div>
   );

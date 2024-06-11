@@ -1,8 +1,11 @@
 import Konva from 'konva';
-import { Group, Layer, Rect } from 'react-konva';
+import { Group, Layer } from 'react-konva';
 
 import { useUpdateBoundingBoxes } from './hooks/useUpdateBoundingBoxes';
 import { useHandleBoundingBoxes } from './hooks/useHandleBoundingBox';
+import Anchor from './ui/Anchor';
+import BoundingBox from './ui/BoundingBox';
+import Rotater from './ui/Rotater';
 
 interface Props {
   stageRef: React.RefObject<Konva.Stage>;
@@ -23,16 +26,32 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
         onDragEnd={handleDragEnd}
       >
         {boundingBoxes.map((boundingBox, index) => (
-          <Rect
-            key={index}
-            x={boundingBox.x}
-            y={boundingBox.y}
-            width={boundingBox.width}
-            height={boundingBox.height}
-            stroke={'rgba(247, 107, 21, 1)'}
-            strokeWidth={2 / scale}
-          />
+          <BoundingBox key={index} boundingBox={boundingBox} scale={scale} />
         ))}
+        {boundingBoxes[0] && (
+          <>
+            <Anchor name="top-left" x={boundingBoxes[0].x} y={boundingBoxes[0].y} scale={scale} />
+            <Anchor
+              name="top-right"
+              x={boundingBoxes[0].x + boundingBoxes[0].width}
+              y={boundingBoxes[0].y}
+              scale={scale}
+            />
+            <Anchor
+              name="bottom-left"
+              x={boundingBoxes[0].x}
+              y={boundingBoxes[0].y + boundingBoxes[0].height}
+              scale={scale}
+            />
+            <Anchor
+              name="bottom-right"
+              x={boundingBoxes[0].x + boundingBoxes[0].width}
+              y={boundingBoxes[0].y + boundingBoxes[0].height}
+              scale={scale}
+            />
+            <Rotater boundingBox={boundingBoxes[0]} scale={scale} />
+          </>
+        )}
       </Group>
     </Layer>
   );

@@ -1,8 +1,8 @@
-import { useCreateShape } from '@/shared/design/hooks';
+import { useCreateShape } from '@/shared/design/hooks/useCreateShape';
 import { DEFAULT_CIRCLE_CONFIG, DEFAULT_RECTANGLE_CONFIG } from '@/shared/design/constant';
+import { useDesignSelectedIds, useDesignShapes } from '@/shared/design/store';
 
 import styles from './styles.module.scss';
-import { useDesignSelectedIds, useDesignShapes } from '@/shared/design/store';
 
 const Toolbar = () => {
   const shapes = useDesignShapes();

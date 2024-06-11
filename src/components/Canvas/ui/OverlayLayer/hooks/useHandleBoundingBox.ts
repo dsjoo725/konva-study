@@ -9,6 +9,9 @@ export const useHandleBoundingBoxes = (selectedShapes: MutableRefObject<Konva.Sh
   const startPoints = useRef<Vector2d | null>(null);
 
   const handleDragStart = (e: KonvaEventObject<DragEvent>) => {
+    // 앵커를 드래그할 때는 전체 도형을 이동하지 않기 위해 이후 처리를 중지합니다.
+    if (e.target.name().includes('anchor')) return;
+
     startPoints.current = e.target.position();
   };
 
@@ -31,6 +34,8 @@ export const useHandleBoundingBoxes = (selectedShapes: MutableRefObject<Konva.Sh
   };
 
   const handleDragEnd = (e: KonvaEventObject<DragEvent>) => {
+    if (!startPoints.current) return;
+
     const { x, y } = e.target.position();
     updateSelectedShapesPosition(x, y);
     updateBoundingBoxesPosition(x, y);
