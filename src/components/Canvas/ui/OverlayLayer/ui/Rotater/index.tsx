@@ -3,16 +3,18 @@ import { Image } from 'react-konva';
 
 import { BoundingBox } from '@/shared/design/type';
 import { useHandleRotater } from './hooks/useHandleRotater';
+import Konva from 'konva';
 
 export const ROTATION_ANCHOR_OFFSET: number = 28;
 export const ROTATION_ANCHOR_SIZE: number = 28;
 
 interface Props {
   boundingBox: BoundingBox;
+  selectedShapes: Konva.Shape[];
   scale: number;
 }
-const Rotater = ({ boundingBox, scale }: Props) => {
-  const { handleDragMove } = useHandleRotater(boundingBox, scale);
+const Rotater = ({ boundingBox, selectedShapes, scale }: Props) => {
+  const { handleDragMove } = useHandleRotater(boundingBox, selectedShapes, scale);
 
   const imgRef = useRef<HTMLImageElement>(document.createElement('img'));
   imgRef.current.src = '/rotater.svg';

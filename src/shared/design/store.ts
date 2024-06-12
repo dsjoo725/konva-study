@@ -8,12 +8,17 @@ export type DesignStore = {
   actions: {
     addShapes: (shapes: Shape[]) => void;
     updateShapePosition: (id: string, x: number, y: number) => void;
+
     addSelectedIds: (ids: string[]) => void;
     deleteSelectedIds: (ids: string[]) => void;
     updateSelectedIds: (ids: string[]) => void;
+
     updateBoundingBoxes: (boundingBoxes: BoundingBox[]) => void;
+
     updateBoundingBoxesPosition: (deltaX: number, deltaY: number) => void;
     updateSelectedShapesPosition: (deltaX: number, deltaY: number) => void;
+
+    updateSelectedShapesRotation: (newShapes: Pick<Shape, 'id' | 'x' | 'y' | 'rotation'>[]) => void;
   };
 };
 
@@ -60,6 +65,15 @@ const useDesignStore = createStore<DesignStore>((set) => ({
             : shape,
         ),
       })),
+
+    updateSelectedShapesRotation: (newShapes) => {
+      set((state) => ({
+        shapes: state.shapes.map((shape) => {
+          const updatedShape = newShapes.find((newShape) => newShape.id === shape.id);
+          return updatedShape ? { ...shape, ...updatedShape } : shape;
+        }),
+      }));
+    },
   },
 }));
 

@@ -1,10 +1,10 @@
-import { MutableRefObject, useRef } from 'react';
+import { useRef } from 'react';
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { useDesignActions, useDesignSelectedIds } from '@/shared/design/store';
 
-export const useHandleBoundingBoxes = (selectedShapes: MutableRefObject<Konva.Shape[]>) => {
+export const useHandleBoundingBoxes = (selectedShapes: Konva.Shape[]) => {
   const {
     updateSelectedIds,
     addSelectedIds,
@@ -31,7 +31,7 @@ export const useHandleBoundingBoxes = (selectedShapes: MutableRefObject<Konva.Sh
     const deltaX = newX - oldX;
     const deltaY = newY - oldY;
 
-    selectedShapes.current.forEach((shape) => {
+    selectedShapes.forEach((shape) => {
       const shapeX = shape.x() + deltaX;
       const shapeY = shape.y() + deltaY;
       shape.position({ x: shapeX, y: shapeY });

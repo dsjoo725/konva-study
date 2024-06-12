@@ -63,18 +63,18 @@ export const useUpdateBoundingBoxes = (
   const selectedIDs = useDesignSelectedIds();
   const { updateBoundingBoxes } = useDesignActions();
 
-  const selectedShapes = useRef<Konva.Shape[]>([]);
+  const selectedShapesRef = useRef<Konva.Shape[]>([]);
 
   useEffect(() => {
     if (!stageRef.current) return;
 
-    selectedShapes.current = selectedIDs
+    selectedShapesRef.current = selectedIDs
       .map((id) => stageRef.current?.findOne(`#${id}`))
       .filter((node): node is Konva.Shape => node instanceof Konva.Shape);
 
     const combinePoints: Vector2d[] = [];
 
-    const clientRects: BoundingBox[] = selectedShapes.current.map((shape) => {
+    const clientRects: BoundingBox[] = selectedShapesRef.current.map((shape) => {
       const rotation = shape.rotation();
       const clientRect = shape.getClientRect({ skipTransform: true });
 
@@ -112,5 +112,5 @@ export const useUpdateBoundingBoxes = (
     updateBoundingBoxes([combineClientRect, ...clientRects]);
   }, [scale, selectedIDs, stageRef, updateBoundingBoxes, x, y]);
 
-  return { boundingBoxes, selectedShapes };
+  return { boundingBoxes, selectedShapesRef };
 };

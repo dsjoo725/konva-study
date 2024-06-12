@@ -14,9 +14,10 @@ interface Props {
   scale: number;
 }
 const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
-  const { boundingBoxes, selectedShapes } = useUpdateBoundingBoxes(stageRef, x, y, scale);
-  const { handleDragStart, handleDragMove, handleDragEnd, handleClick } =
-    useHandleBoundingBoxes(selectedShapes);
+  const { boundingBoxes, selectedShapesRef } = useUpdateBoundingBoxes(stageRef, x, y, scale);
+  const { handleDragStart, handleDragMove, handleDragEnd, handleClick } = useHandleBoundingBoxes(
+    selectedShapesRef.current,
+  );
 
   return (
     <Layer x={x} y={y}>
@@ -41,7 +42,11 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
               y={boundingBoxes[0].height}
               scale={scale}
             />
-            <Rotater boundingBox={boundingBoxes[0]} scale={scale} />
+            <Rotater
+              boundingBox={boundingBoxes[0]}
+              selectedShapes={selectedShapesRef.current}
+              scale={scale}
+            />
           </Group>
         )}
       </Group>
