@@ -2,12 +2,12 @@ import Konva from 'konva';
 import { Group, Layer } from 'react-konva';
 
 import { useUpdateBoundingBoxes } from './hooks/useUpdateBoundingBoxes';
+import { useHandleTransformer } from './hooks/useHandleTransformer';
 
 import Anchor from './ui/Anchor';
 import BoundingBox from './ui/BoundingBox';
 import Rotater from './ui/Rotater';
 import SelectBox from './ui/SelectBox';
-import Transformer from './ui/Transformer';
 
 interface Props {
   stageRef: React.RefObject<Konva.Stage>;
@@ -17,10 +17,19 @@ interface Props {
 }
 const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
   const { boundingBoxes, selectedShapesRef } = useUpdateBoundingBoxes(stageRef, x, y, scale);
+  const { handleClick, handleDragStart, handleDragMove, handleDragEnd } = useHandleTransformer(
+    selectedShapesRef.current,
+  );
 
   return (
-    <Layer x={x} y={y}>
-      <Transformer selectedShapes={selectedShapesRef.current}>
+    <Layer x={x} y={y} onDragStart={handleDragStart}>
+      <Group
+        draggable
+        onDragStart={handleDragStart}
+        onDragMove={handleDragMove}
+        onDragEnd={handleDragEnd}
+        onClick={handleClick}
+      >
         {boundingBoxes.map((boundingBox, index) => (
           <BoundingBox key={index} index={index} boundingBox={boundingBox} scale={scale} />
         ))}
@@ -42,7 +51,7 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
             />
           </Group>
         )}
-      </Transformer>
+      </Group>
       <SelectBox />
     </Layer>
   );
