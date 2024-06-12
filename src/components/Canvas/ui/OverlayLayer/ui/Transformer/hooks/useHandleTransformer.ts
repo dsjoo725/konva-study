@@ -4,7 +4,7 @@ import { Vector2d } from 'konva/lib/types';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { useDesignActions, useDesignSelectedIds } from '@/shared/design/store';
 
-export const useHandleBoundingBoxes = (selectedShapes: Konva.Shape[]) => {
+export const useHandleTransformer = (selectedShapes: Konva.Shape[]) => {
   const {
     updateSelectedIds,
     addSelectedIds,
