@@ -17,7 +17,15 @@ const Toolbar = () => {
       <div>전체</div>
       <ul>
         {shapes.map((shape) => (
-          <li key={shape.id}>{`type: ${shape.type} / x: ${shape.x} / y: ${shape.y}`}</li>
+          <li key={shape.id}>
+            {`type: ${shape.type}`}
+            <br />
+            {`x: ${shape.x}`}
+            <br />
+            {`y: ${shape.y}`}
+            <br />
+            {`rotation: ${shape.rotation}`}
+          </li>
         ))}
       </ul>
       <div>선택한 도형</div>
