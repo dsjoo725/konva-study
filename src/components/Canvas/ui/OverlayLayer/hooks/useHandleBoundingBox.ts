@@ -31,6 +31,7 @@ export const useHandleBoundingBoxes = (selectedShapes: Konva.Shape[]) => {
     const deltaX = newX - oldX;
     const deltaY = newY - oldY;
 
+    // 선택된 모든 도형을 새 위치로 이동시킵니다.
     selectedShapes.forEach((shape) => {
       const shapeX = shape.x() + deltaX;
       const shapeY = shape.y() + deltaY;
@@ -44,10 +45,12 @@ export const useHandleBoundingBoxes = (selectedShapes: Konva.Shape[]) => {
     if (!startPoints.current) return;
 
     const { x, y } = e.target.position();
+    // 도형 및 바운딩 박스의 위치를 업데이트합니다.
     updateSelectedShapesPosition(x, y);
     updateBoundingBoxesPosition(x, y);
 
     startPoints.current = null;
+    // 드래그 대상의 위치를 초기화합니다.
     e.target.x(0);
     e.target.y(0);
   };
@@ -59,25 +62,32 @@ export const useHandleBoundingBoxes = (selectedShapes: Konva.Shape[]) => {
 
     if (!pointerPosition || !(shapeLayer instanceof Konva.Layer)) return;
 
+    // 포인터 위치나 도형 레이어가 유효하지 않으면 처리를 중지합니다.
     const { x, y } = pointerPosition;
     const targetShape = shapeLayer.getIntersection({ x, y });
 
+    // 포인터 위치에 도형이 없으면 처리를 중지합니다.
     if (!targetShape) return;
 
     const targetShapeId = targetShape.id();
     const isShapeSelected = selectedIDs.includes(targetShapeId);
     const isCtrlOrShiftPressed = e.evt.ctrlKey || e.evt.shiftKey;
 
+    // 선택된 도형을 관리합니다.
     if (isShapeSelected) {
       if (isCtrlOrShiftPressed) {
+        // Ctrl 또는 Shift 키가 눌려 있는 경우 선택된 도형을 선택 목록에서 제거합니다.
         deleteSelectedIds([targetShapeId]);
       } else if (selectedIDs.length > 1) {
+        // 다른 도형이 선택되어 있는 경우 해당 도형만 선택합니다.
         updateSelectedIds([targetShapeId]);
       }
     } else {
       if (isCtrlOrShiftPressed) {
+        // Ctrl 또는 Shift 키가 눌려 있는 경우 도형을 선택 목록에 추가합니다.
         addSelectedIds([targetShapeId]);
       } else {
+        // 도형을 단독으로 선택합니다.
         updateSelectedIds([targetShapeId]);
       }
     }

@@ -126,16 +126,22 @@ export const useHandleRotater = (
 
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const rotateAngle = calculateRotateAngle(e.target.x(), e.target.y(), boundingBox, scale);
+    const angleInDegrees = radToDeg(rotateAngle);
 
-    if (radToDeg(rotateAngle) === 0 || radToDeg(rotateAngle) === 360) {
+    // 회전 각도가 0도 또는 360도인 경우, 위치만 설정하고 반환합니다.
+    if (angleInDegrees === 0 || angleInDegrees === 360) {
       setPosition(e.target, boundingBox);
       return;
     }
 
+    // 바운딩 박스를 회전 중심을 기준으로 회전시킵니다.
     const rotatedBoundingBox = rotateAroundCenter(boundingBox, rotateAngle);
+    // 상대적인 변환을 계산합니다.
     const transform = calculateRelativeTransform(boundingBox, rotatedBoundingBox);
 
+    // 선택된 도형들에 변환을 적용합니다.
     const newShapes = updateSelectedShapesWithTransform(selectedShapes, transform);
+    // 바운딩 박스들에 변환을 적용합니다.
     const newBoundingBoxes = updateBoundingBoxesWithTransform(e, boundingBoxes, transform);
 
     updateSelectedShapesRotation(newShapes);

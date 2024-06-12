@@ -11,25 +11,6 @@ import { BoundingBox } from '@/shared/design/type';
 import { Transform } from 'konva/lib/Util';
 import { degToRad } from '@/shared/@common/utils/math';
 
-/**
- * @name calculateBoundingBox
- * @description
- * 주어진 점들과 회전 각도를 이용하여 바운딩 박스를 계산합니다.
- * ```typescript
- * calculateBoundingBox(
- *   // 2D 벡터로 이루어진 점들의 배열
- *   points: Vector2d[],
- *   // 회전 각도 (도 단위)
- *   rotation: number
- * ): { x: number, y: number, width: number, height: number, rotation: number }
- * ```
- * @example
- * calculateBoundingBox(
- *   [{ x: 100, y: 100 },{ x: 200, y: 100 },{ x: 100, y: 300 },{ x: 200, y: 300 }],
- *   90
- * )
- * // { x: 200, y: 100, width: 200, height: 100, rotation: 90 }
- */
 const calculateBoundingBox = (points: Vector2d[], rotation: number) => {
   const transform = new Transform();
   transform.rotate(-degToRad(rotation));
@@ -68,12 +49,14 @@ export const useUpdateBoundingBoxes = (
   useEffect(() => {
     if (!stageRef.current) return;
 
+    // 선택된 도형들을 참조로 저장합니다.
     selectedShapesRef.current = selectedIDs
       .map((id) => stageRef.current?.findOne(`#${id}`))
       .filter((node): node is Konva.Shape => node instanceof Konva.Shape);
 
     const combinePoints: Vector2d[] = [];
 
+    // 각 도형의 변환된 경계 상자를 계산합니다.
     const clientRects: BoundingBox[] = selectedShapesRef.current.map((shape) => {
       const rotation = shape.rotation();
       const clientRect = shape.getClientRect({ skipTransform: true });
@@ -88,6 +71,7 @@ export const useUpdateBoundingBoxes = (
       const getTransform = shape.getTransform();
       const transformedPoints: Vector2d[] = [];
 
+      // 코너 포인트를 변환합니다.
       cornerPoints.forEach((point) => {
         const transformedPoint = getTransform.point(point);
         transformedPoints.push(transformedPoint);
@@ -98,15 +82,19 @@ export const useUpdateBoundingBoxes = (
       return calculateBoundingBox(transformedPoints, rotation);
     });
 
+    // 선택된 도형이 없는 경우
     if (clientRects.length === 0) {
       updateBoundingBoxes([]);
       return;
     }
 
+    // 하나의 도형만 선택된 경우
     if (clientRects.length === 1) {
       updateBoundingBoxes(clientRects);
       return;
     }
+
+    // 여러 도형이 선택된 경우 결합된 바운딩 박스를 계산합니다.
     const combineClientRect = calculateBoundingBox(combinePoints, 0);
 
     updateBoundingBoxes([combineClientRect, ...clientRects]);
