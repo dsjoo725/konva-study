@@ -6,7 +6,7 @@ import Canvas from '@/components/Canvas';
 const DesignPage = () => {
   return (
     <div className={styles.layout}>
-      <h1>PrintStudio</h1>
+      <h1>KonvaStudy</h1>
       <div className={styles.container}>
         <Toolbar />
         <Canvas />
