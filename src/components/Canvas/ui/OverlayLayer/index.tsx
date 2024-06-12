@@ -28,7 +28,7 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
         onClick={handleClick}
       >
         {boundingBoxes.map((boundingBox, index) => (
-          <BoundingBox key={index} boundingBox={boundingBox} scale={scale} />
+          <BoundingBox key={index} index={index} boundingBox={boundingBox} scale={scale} />
         ))}
         {boundingBoxes[0] && (
           <Group x={boundingBoxes[0].x} y={boundingBoxes[0].y} rotation={boundingBoxes[0].rotation}>
