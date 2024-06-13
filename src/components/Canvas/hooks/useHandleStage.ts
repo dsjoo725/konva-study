@@ -5,7 +5,7 @@ import Konva from 'konva';
 import { useDesignActions } from '@/shared/design/store';
 
 export const useHandleStage = () => {
-  const { updateSelectedIds } = useDesignActions();
+  const { setSelectedShapeIds } = useDesignActions();
   const startPoints = useRef<Vector2d | null>(null);
 
   const handleMouseDown = (e: KonvaEventObject<DragEvent>) => {
@@ -57,7 +57,7 @@ export const useHandleStage = () => {
         .filter((shape) => Konva.Util.haveIntersection(selectBoxRect, shape.getClientRect()))
         .map((shape) => shape.id());
 
-      updateSelectedIds(selectedIds);
+      setSelectedShapeIds(selectedIds);
     }
 
     selectBox.width(0);

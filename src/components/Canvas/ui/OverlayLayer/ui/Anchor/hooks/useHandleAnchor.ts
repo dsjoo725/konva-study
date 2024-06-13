@@ -1,12 +1,12 @@
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
 
-import { useDesignActions, useDesignBoundingBoxes } from '@/shared/design/store';
+import { useBoundingBoxes, useDesignActions } from '@/shared/design/store';
 import { BoundingBox } from '@/shared/design/type';
 import {
   calculateRelativeTransform,
-  updateBoundingBoxesWithTransform,
-  updateShapesWithTransform,
+  transformBoundingBoxes,
+  transformShapeAttributes,
 } from '@/shared/design/utils/transform';
 
 const MIN_WIDTH = 10 as const;
@@ -21,8 +21,8 @@ const calculateNewBoundingBox = (
   return {
     x: topLeft.getAbsolutePosition(overlayLayer).x,
     y: topLeft.getAbsolutePosition(overlayLayer).y,
-    width: bottomRight.x() - topLeft.x(),
-    height: bottomRight.y() - topLeft.y(),
+    width: Math.max(bottomRight.x() - topLeft.x(), MIN_WIDTH),
+    height: Math.max(bottomRight.y() - topLeft.y(), MIN_HEIGHT),
     rotation: rotation,
   };
 };
@@ -33,8 +33,8 @@ const setPosition = (topLeft: Konva.Node, bottomRight: Konva.Node, boundingBox: 
 };
 
 export const useHandleAnchor = (selectedShapes: Konva.Shape[]) => {
-  const boundingBoxes = useDesignBoundingBoxes();
-  const { updateBoundingBoxes, updateShapesAttrs } = useDesignActions();
+  const boundingBoxes = useBoundingBoxes();
+  const { setBoundingBoxes, updateShapeAttributes } = useDesignActions();
 
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const anchor = e.target;
@@ -72,20 +72,15 @@ export const useHandleAnchor = (selectedShapes: Konva.Shape[]) => {
       overlayLayer,
     );
 
-    if (newBoundingBox.width < MIN_WIDTH || newBoundingBox.height < MIN_HEIGHT) {
-      setPosition(topLeft, bottomRight, boundingBoxes[0]);
-      return;
-    }
-
     const transform = calculateRelativeTransform(boundingBoxes[0], newBoundingBox);
 
     // 바운딩 박스들에 변환을 적용합니다.
-    const newBoundingBoxes = updateBoundingBoxesWithTransform(e, boundingBoxes, transform);
+    const newBoundingBoxes = transformBoundingBoxes(e, boundingBoxes, transform);
     // 선택된 도형들에 변환을 적용합니다.
-    const attrs = updateShapesWithTransform(selectedShapes, transform);
+    const attrs = transformShapeAttributes(selectedShapes, transform);
 
-    updateBoundingBoxes(newBoundingBoxes);
-    updateShapesAttrs(attrs);
+    setBoundingBoxes(newBoundingBoxes);
+    updateShapeAttributes(attrs);
 
     setPosition(topLeft, bottomRight, newBoundingBox);
   };

@@ -3,13 +3,10 @@ import { KonvaEventObject } from 'konva/lib/Node';
 
 import { BoundingBox } from '@/shared/design/type';
 import { calculateAngle, degToRad, radToDeg } from '@/shared/@common/utils/math';
-import { useDesignActions, useDesignBoundingBoxes } from '@/shared/design/store';
+import { useDesignActions, useBoundingBoxes } from '@/shared/design/store';
 import { calculateRelativeTransform } from '@/shared/design/utils/transform';
 import { ROTATION_ANCHOR_OFFSET } from '@/shared/design/constant';
-import {
-  updateBoundingBoxesWithTransform,
-  updateShapesWithTransform,
-} from '@/shared/design/utils/transform';
+import { transformBoundingBoxes, transformShapeAttributes } from '@/shared/design/utils/transform';
 
 const ROTATION_SNAPS: number[] = [0, 90, 180, 270];
 const SNAP_TOL: number = 45;
@@ -87,8 +84,8 @@ export const useHandleRotater = (
   selectedShapes: Konva.Shape[],
   scale: number,
 ) => {
-  const boundingBoxes = useDesignBoundingBoxes();
-  const { updateBoundingBoxes, updateShapesAttrs } = useDesignActions();
+  const boundingBoxes = useBoundingBoxes();
+  const { setBoundingBoxes, updateShapeAttributes } = useDesignActions();
 
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const rotateAngle = calculateRotateAngle(e.target.x(), e.target.y(), boundingBox, scale);
@@ -106,12 +103,12 @@ export const useHandleRotater = (
     const transform = calculateRelativeTransform(boundingBox, rotatedBoundingBox);
 
     // 바운딩 박스들에 변환을 적용합니다.
-    const newBoundingBoxes = updateBoundingBoxesWithTransform(e, boundingBoxes, transform);
+    const newBoundingBoxes = transformBoundingBoxes(e, boundingBoxes, transform);
     // 선택된 도형들에 변환을 적용합니다.
-    const attrs = updateShapesWithTransform(selectedShapes, transform);
+    const attrs = transformShapeAttributes(selectedShapes, transform);
 
-    updateBoundingBoxes(newBoundingBoxes);
-    updateShapesAttrs(attrs);
+    setBoundingBoxes(newBoundingBoxes);
+    updateShapeAttributes(attrs);
 
     setPosition(e.target, boundingBox);
   };

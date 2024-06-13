@@ -1,12 +1,12 @@
 import { useCreateShape } from '@/shared/design/hooks/useCreateShape';
 import { DEFAULT_CIRCLE_CONFIG, DEFAULT_RECTANGLE_CONFIG } from '@/shared/design/constant';
-import { useDesignSelectedIds, useDesignShapes } from '@/shared/design/store';
+import { useSelectedShapeIds, useShapes } from '@/shared/design/store';
 
 import styles from './styles.module.scss';
 
 const Toolbar = () => {
-  const shapes = useDesignShapes();
-  const selectedIds = useDesignSelectedIds();
+  const shapes = useShapes();
+  const selectedIds = useSelectedShapeIds();
   const { createCircle, createRectangle } = useCreateShape();
 
   return (
@@ -18,7 +18,7 @@ const Toolbar = () => {
       <ul>
         {shapes.map((shape) => (
           <li key={shape.id}>
-            {`type: ${shape.type}`}
+            {`type: ${shape.shapeType}`}
             <br />
             {`x: ${shape.x}`}
             <br />

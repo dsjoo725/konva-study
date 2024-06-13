@@ -2,17 +2,17 @@ import { useRef } from 'react';
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
 import { KonvaEventObject } from 'konva/lib/Node';
-import { useDesignActions, useDesignSelectedIds } from '@/shared/design/store';
+import { useDesignActions, useSelectedShapeIds } from '@/shared/design/store';
 
 export const useHandleTransformer = (selectedShapes: Konva.Shape[]) => {
   const {
-    updateSelectedIds,
-    addSelectedIds,
-    deleteSelectedIds,
-    updateBoundingBoxesPosition,
-    updateSelectedShapesPosition,
+    setSelectedShapeIds,
+    addSelectedShapeIds,
+    removeSelectedShapeIds,
+    moveBoundingBoxes,
+    moveSelectedShapes,
   } = useDesignActions();
-  const selectedIDs = useDesignSelectedIds();
+  const selectedIDs = useSelectedShapeIds();
   const startPoints = useRef<Vector2d | null>(null);
 
   const handleDragStart = (e: KonvaEventObject<DragEvent>) => {
@@ -46,8 +46,8 @@ export const useHandleTransformer = (selectedShapes: Konva.Shape[]) => {
 
     const { x, y } = e.target.position();
     // 도형 및 바운딩 박스의 위치를 업데이트합니다.
-    updateSelectedShapesPosition(x, y);
-    updateBoundingBoxesPosition(x, y);
+    moveSelectedShapes(x, y);
+    moveBoundingBoxes(x, y);
 
     startPoints.current = null;
     // 드래그 대상의 위치를 초기화합니다.
@@ -77,18 +77,18 @@ export const useHandleTransformer = (selectedShapes: Konva.Shape[]) => {
     if (isShapeSelected) {
       if (isCtrlOrShiftPressed) {
         // Ctrl 또는 Shift 키가 눌려 있는 경우 선택된 도형을 선택 목록에서 제거합니다.
-        deleteSelectedIds([targetShapeId]);
+        removeSelectedShapeIds([targetShapeId]);
       } else if (selectedIDs.length > 1) {
         // 다른 도형이 선택되어 있는 경우 해당 도형만 선택합니다.
-        updateSelectedIds([targetShapeId]);
+        setSelectedShapeIds([targetShapeId]);
       }
     } else {
       if (isCtrlOrShiftPressed) {
         // Ctrl 또는 Shift 키가 눌려 있는 경우 도형을 선택 목록에 추가합니다.
-        addSelectedIds([targetShapeId]);
+        addSelectedShapeIds([targetShapeId]);
       } else {
         // 도형을 단독으로 선택합니다.
-        updateSelectedIds([targetShapeId]);
+        setSelectedShapeIds([targetShapeId]);
       }
     }
   };

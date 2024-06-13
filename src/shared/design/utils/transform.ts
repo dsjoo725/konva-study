@@ -69,10 +69,10 @@ export const getAttrsTransform = (shape: Konva.Shape, transform: Konva.Transform
   return newTransform.decompose();
 };
 
-export const updateShapesWithTransform = (
+export const transformShapeAttributes = (
   shapes: Konva.Shape[],
   transform: Konva.Transform,
-): Partial<Shape>[] => {
+): (Partial<Shape> & { id: string })[] => {
   return shapes.map((shape) => {
     const attrs = getAttrsTransform(shape, transform);
 
@@ -105,7 +105,7 @@ export const updateShapesWithTransform = (
   });
 };
 
-export const updateBoundingBoxesWithTransform = (
+export const transformBoundingBoxes = (
   e: KonvaEventObject<DragEvent>,
   boundingBoxes: BoundingBox[],
   transform: Konva.Transform,

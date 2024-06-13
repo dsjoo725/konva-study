@@ -1,6 +1,6 @@
 import { Layer } from 'react-konva';
 
-import { useDesignShapes } from '@/shared/design/store';
+import { useShapes } from '@/shared/design/store';
 
 import Rectangle from './ui/Rectangle';
 import Circle from './ui/Cirlce';
@@ -10,7 +10,7 @@ interface Props {
   y: number;
 }
 const ShapesLayer = ({ x, y }: Props) => {
-  const shapes = useDesignShapes();
+  const shapes = useShapes();
 
   return (
     <Layer name="shape-layer" x={x} y={y}>

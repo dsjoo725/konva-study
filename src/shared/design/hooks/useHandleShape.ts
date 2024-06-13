@@ -2,7 +2,7 @@ import { useDesignActions } from '@/shared/design/store';
 import { KonvaEventObject } from 'konva/lib/Node';
 
 export const useHandleShape = () => {
-  const { updateShapePosition, updateSelectedIds, addSelectedIds } = useDesignActions();
+  const { updateShapePosition, setSelectedShapeIds, addSelectedShapeIds } = useDesignActions();
 
   const handleDragEnd = (id: string) => (e: KonvaEventObject<DragEvent>) => {
     const { x, y } = e.target.position();
@@ -12,9 +12,9 @@ export const useHandleShape = () => {
     // Shift 또는 Ctrl 키가 눌려 있는 경우 선택된 도형 목록에 추가합니다.
     // 그렇지 않으면 선택된 도형 목록을 현재 도형만 포함하도록 업데이트합니다.
     if (e.evt.shiftKey || e.evt.ctrlKey) {
-      addSelectedIds([id]);
+      addSelectedShapeIds([id]);
     } else {
-      updateSelectedIds([id]);
+      setSelectedShapeIds([id]);
     }
   };
 
@@ -22,9 +22,9 @@ export const useHandleShape = () => {
     // Shift 또는 Ctrl 키가 눌려 있는 경우 선택된 도형 목록에 추가합니다.
     // 그렇지 않으면 선택된 도형 목록을 현재 도형만 포함하도록 업데이트합니다.
     if (e.evt.shiftKey || e.evt.ctrlKey) {
-      addSelectedIds([id]);
+      addSelectedShapeIds([id]);
     } else {
-      updateSelectedIds([id]);
+      setSelectedShapeIds([id]);
     }
   };
 

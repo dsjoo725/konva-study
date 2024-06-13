@@ -3,52 +3,88 @@ import { BoundingBox, Shape } from './type';
 
 export type DesignStore = {
   shapes: Shape[];
-  selectedIds: string[];
+  selectedShapeIds: string[];
   boundingBoxes: BoundingBox[];
   actions: {
     addShapes: (shapes: Shape[]) => void;
     updateShapePosition: (id: string, x: number, y: number) => void;
-    updateShapesAttrs: (attrs: Partial<Shape>[]) => void;
-    updateSelectedShapesPosition: (deltaX: number, deltaY: number) => void;
-
-    addSelectedIds: (ids: string[]) => void;
-    deleteSelectedIds: (ids: string[]) => void;
-    updateSelectedIds: (ids: string[]) => void;
-
-    updateBoundingBoxes: (boundingBoxes: BoundingBox[]) => void;
-    updateBoundingBoxesPosition: (deltaX: number, deltaY: number) => void;
+    updateShapeAttributes: (attributes: (Partial<Shape> & { id: string })[]) => void;
+    moveSelectedShapes: (deltaX: number, deltaY: number) => void;
+    addSelectedShapeIds: (ids: string[]) => void;
+    removeSelectedShapeIds: (ids: string[]) => void;
+    setSelectedShapeIds: (ids: string[]) => void;
+    setBoundingBoxes: (boundingBoxes: BoundingBox[]) => void;
+    moveBoundingBoxes: (deltaX: number, deltaY: number) => void;
   };
 };
 
 // eslint-disable-next-line @rushstack/typedef-var
 const useDesignStore = createStore<DesignStore>((set) => ({
   shapes: [],
-  selectedIds: [],
+  selectedShapeIds: [],
   boundingBoxes: [],
 
   actions: {
-    addShapes: (shapes) => set((state) => ({ shapes: [...state.shapes, ...shapes] })),
+    // 도형 추가
+    addShapes: (shapes) =>
+      set((state) => ({
+        shapes: [...state.shapes, ...shapes],
+      })),
 
+    // 도형 위치 업데이트
     updateShapePosition: (id, x, y) =>
       set((state) => ({
         shapes: state.shapes.map((shape) => (shape.id === id ? { ...shape, x, y } : shape)),
       })),
 
-    updateSelectedIds: (ids) => set(() => ({ selectedIds: ids })),
-
-    addSelectedIds: (ids) =>
+    // 도형 속성 업데이트
+    updateShapeAttributes: (attributes) =>
       set((state) => ({
-        selectedIds: [...state.selectedIds, ...ids.filter((id) => !state.selectedIds.includes(id))],
+        shapes: state.shapes.map((shape) => {
+          const updatedShape = attributes.find((attr) => attr.id === shape.id);
+          return updatedShape ? { ...shape, ...updatedShape } : shape;
+        }),
       })),
 
-    deleteSelectedIds: (ids) =>
+    // 선택된 도형 이동
+    moveSelectedShapes: (deltaX, deltaY) =>
       set((state) => ({
-        selectedIds: state.selectedIds.filter((id) => !ids.includes(id)),
+        shapes: state.shapes.map((shape) =>
+          state.selectedShapeIds.includes(shape.id)
+            ? { ...shape, x: shape.x + deltaX, y: shape.y + deltaY }
+            : shape,
+        ),
       })),
 
-    updateBoundingBoxes: (boundingBoxes) => set(() => ({ boundingBoxes })),
+    // 선택된 도형 ID 추가
+    addSelectedShapeIds: (ids) =>
+      set((state) => ({
+        selectedShapeIds: [
+          ...state.selectedShapeIds,
+          ...ids.filter((id) => !state.selectedShapeIds.includes(id)),
+        ],
+      })),
 
-    updateBoundingBoxesPosition: (deltaX, deltaY) =>
+    // 선택된 도형 ID 제거
+    removeSelectedShapeIds: (ids) =>
+      set((state) => ({
+        selectedShapeIds: state.selectedShapeIds.filter((id) => !ids.includes(id)),
+      })),
+
+    // 선택된 도형 ID 설정
+    setSelectedShapeIds: (ids) =>
+      set(() => ({
+        selectedShapeIds: ids,
+      })),
+
+    // 바운딩 박스 설정
+    setBoundingBoxes: (boundingBoxes) =>
+      set(() => ({
+        boundingBoxes,
+      })),
+
+    // 바운딩 박스 이동
+    moveBoundingBoxes: (deltaX, deltaY) =>
       set((state) => ({
         boundingBoxes: state.boundingBoxes.map((boundingBox) => ({
           ...boundingBox,
@@ -56,28 +92,10 @@ const useDesignStore = createStore<DesignStore>((set) => ({
           y: boundingBox.y + deltaY,
         })),
       })),
-
-    updateSelectedShapesPosition: (deltaX, deltaY) =>
-      set((state) => ({
-        shapes: state.shapes.map((shape) =>
-          state.selectedIds.includes(shape.id)
-            ? { ...shape, x: shape.x + deltaX, y: shape.y + deltaY }
-            : shape,
-        ),
-      })),
-
-    updateShapesAttrs: (attrs) => {
-      set((state) => ({
-        shapes: state.shapes.map((shape) => {
-          const updatedShape = attrs.find((attr) => attr.id === shape.id);
-          return updatedShape ? { ...shape, ...updatedShape } : shape;
-        }),
-      }));
-    },
   },
 }));
 
 export const useDesignActions = () => useDesignStore((state) => state.actions);
-export const useDesignShapes = () => useDesignStore((state) => state.shapes);
-export const useDesignSelectedIds = () => useDesignStore((state) => state.selectedIds);
-export const useDesignBoundingBoxes = () => useDesignStore((state) => state.boundingBoxes);
+export const useShapes = () => useDesignStore((state) => state.shapes);
+export const useSelectedShapeIds = () => useDesignStore((state) => state.selectedShapeIds);
+export const useBoundingBoxes = () => useDesignStore((state) => state.boundingBoxes);

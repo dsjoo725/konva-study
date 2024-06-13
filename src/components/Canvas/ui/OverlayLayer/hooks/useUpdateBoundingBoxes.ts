@@ -1,14 +1,10 @@
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
+import { Transform } from 'konva/lib/Util';
 import { useEffect, useRef } from 'react';
 
-import {
-  useDesignActions,
-  useDesignBoundingBoxes,
-  useDesignSelectedIds,
-} from '@/shared/design/store';
+import { useBoundingBoxes, useDesignActions, useSelectedShapeIds } from '@/shared/design/store';
 import { BoundingBox } from '@/shared/design/type';
-import { Transform } from 'konva/lib/Util';
 import { degToRad } from '@/shared/@common/utils/math';
 
 const calculateBoundingBox = (points: Vector2d[], rotation: number) => {
@@ -40,9 +36,9 @@ export const useUpdateBoundingBoxes = (
   y: number,
   scale: number,
 ) => {
-  const boundingBoxes = useDesignBoundingBoxes();
-  const selectedIDs = useDesignSelectedIds();
-  const { updateBoundingBoxes } = useDesignActions();
+  const boundingBoxes = useBoundingBoxes();
+  const selectedIDs = useSelectedShapeIds();
+  const { setBoundingBoxes } = useDesignActions();
 
   const selectedShapesRef = useRef<Konva.Shape[]>([]);
 
@@ -84,21 +80,21 @@ export const useUpdateBoundingBoxes = (
 
     // 선택된 도형이 없는 경우
     if (clientRects.length === 0) {
-      updateBoundingBoxes([]);
+      setBoundingBoxes([]);
       return;
     }
 
     // 하나의 도형만 선택된 경우
     if (clientRects.length === 1) {
-      updateBoundingBoxes(clientRects);
+      setBoundingBoxes(clientRects);
       return;
     }
 
     // 여러 도형이 선택된 경우 결합된 바운딩 박스를 계산합니다.
     const combineClientRect = calculateBoundingBox(combinePoints, 0);
 
-    updateBoundingBoxes([combineClientRect, ...clientRects]);
-  }, [scale, selectedIDs, stageRef, updateBoundingBoxes, x, y]);
+    setBoundingBoxes([combineClientRect, ...clientRects]);
+  }, [scale, selectedIDs, stageRef, x, y, setBoundingBoxes]);
 
   return { boundingBoxes, selectedShapesRef };
 };

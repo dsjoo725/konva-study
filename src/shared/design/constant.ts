@@ -6,14 +6,14 @@ export const DEFAULT_RECTANGLE_CONFIG: RectangleConfig = {
   width: 100,
   height: 200,
   stroke: 'black',
-  strokeWidth: 100,
+  strokeWidth: 20,
   fill: 'white',
   rotation: 0,
 };
 
 export const DEFAULT_CIRCLE_CONFIG: CircleConfig = {
-  x: 0,
-  y: 0,
+  x: 200,
+  y: 200,
   radiusX: 100,
   radiusY: 100,
   stroke: 'black',
