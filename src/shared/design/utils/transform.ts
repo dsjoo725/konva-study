@@ -96,6 +96,7 @@ export const transformShapeAttributes = (
   return shapes.map((shape) => {
     const attrs = getAttrsTransform(shape, transform);
 
+    // 선 두께에 따른 오차를 계산합니다.
     const offsetX = shape.strokeWidth() * (attrs.scaleX - 1);
     const offsetY = shape.strokeWidth() * (attrs.scaleY - 1);
 
@@ -128,7 +129,7 @@ export const transformShapeAttributes = (
 /**
  * @name transformBoundingBoxes
  * @description
- * 드래그 이벤트와 변환 객체를 사용하여 주어진 바운딩 박스 배열의 위치, 크기 및 회전 각도를 업데이트합니다.
+ * 변환 객체를 사용하여 주어진 바운딩 박스 배열의 위치, 크기 및 회전 각도를 업데이트합니다.
  * ```typescript
  * transformBoundingBoxes(
  *   // Konva 드래그 이벤트 객체
