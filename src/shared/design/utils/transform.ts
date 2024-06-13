@@ -62,13 +62,33 @@ const calculateNewTransform = (
   return newTransform;
 };
 
-export const getAttrsTransform = (shape: Konva.Shape, transform: Konva.Transform) => {
+const getAttrsTransform = (shape: Konva.Shape, transform: Konva.Transform) => {
   const localTransform = getLocalTransform(shape);
   const newTransform = calculateNewTransform(transform, localTransform);
 
   return newTransform.decompose();
 };
 
+/**
+ * @name transformShapeAttributes
+ * @description
+ * 주어진 도형들의 위치, 크기 및 회전 각도를 주어진 변환 객체를 사용하여 업데이트합니다. 선 두께에 따른 오차를 보정합니다.
+ * ```typescript
+ * transformShapeAttributes(
+ *   // 변환할 Konva 도형들의 배열
+ *   shapes: Konva.Shape[],
+ *   // 적용할 Konva 변환 객체
+ *   transform: Konva.Transform
+ * ): (Partial<Shape> & { id: string })[]
+ * ```
+ * @example
+ * transformShapeAttributes([shape1, shape2], transform);
+ * // 변환된 도형들의 속성 배열을 반환합니다.
+ * // [
+ * //   { id: 'shape1', x: newX1, y: newY1, width: newWidth1, height: newHeight1, rotation: newRotation1 },
+ * //   { id: 'shape2', x: newX2, y: newY2, radiusX: newRadiusX, radiusY: newRadiusY, rotation: newRotation2 },
+ * // ]
+ */
 export const transformShapeAttributes = (
   shapes: Konva.Shape[],
   transform: Konva.Transform,
@@ -105,6 +125,31 @@ export const transformShapeAttributes = (
   });
 };
 
+/**
+ * @name transformBoundingBoxes
+ * @description
+ * 드래그 이벤트와 변환 객체를 사용하여 주어진 바운딩 박스 배열의 위치, 크기 및 회전 각도를 업데이트합니다.
+ * ```typescript
+ * transformBoundingBoxes(
+ *   // Konva 드래그 이벤트 객체
+ *   e: KonvaEventObject<DragEvent>,
+ *   // 바운딩 박스 배열
+ *   boundingBoxes: BoundingBox[],
+ *   // Konva 변환 객체
+ *   transform: Konva.Transform
+ * ): BoundingBox[]
+ * ```
+ * @example
+ * transformBoundingBoxes(event, transform, [
+ *   { x: 0, y: 0, width: 10, height: 5, rotation: 0 },
+ *   { x: 10, y: 10, width: 15, height: 10, rotation: 0 },
+ * ])
+ * // 업데이트된 바운딩 박스 배열
+ * // [
+ * //   { x: newX1, y: newY1, width: newWidth1, height: newHeight1, rotation: newRotation1 },
+ * //   { x: newX2, y: newY2, width: newWidth2, height: newHeight2, rotation: newRotation2 },
+ * // ]
+ */
 export const transformBoundingBoxes = (
   e: KonvaEventObject<DragEvent>,
   boundingBoxes: BoundingBox[],
