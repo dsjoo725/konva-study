@@ -1,3 +1,5 @@
+import Konva from 'konva';
+
 import { Rect } from 'react-konva';
 import { useHandleAnchor } from './hooks/useHandleAnchor';
 
@@ -5,10 +7,11 @@ interface Props {
   name: string;
   x: number;
   y: number;
+  selectedShapes: Konva.Shape[];
   scale: number;
 }
-const Anchor = ({ name, x, y, scale }: Props) => {
-  const { handleDragMove } = useHandleAnchor();
+const Anchor = ({ name, x, y, selectedShapes, scale }: Props) => {
+  const { handleDragMove } = useHandleAnchor(selectedShapes);
   return (
     <Rect
       name={`${name}-anchor`}

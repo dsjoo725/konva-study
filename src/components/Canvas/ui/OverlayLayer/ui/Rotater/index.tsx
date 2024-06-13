@@ -1,12 +1,11 @@
 import { useRef } from 'react';
 import { Image } from 'react-konva';
-
-import { BoundingBox } from '@/shared/design/type';
-import { useHandleRotater } from './hooks/useHandleRotater';
 import Konva from 'konva';
 
-export const ROTATION_ANCHOR_OFFSET: number = 28;
-export const ROTATION_ANCHOR_SIZE: number = 28;
+import { useHandleRotater } from './hooks/useHandleRotater';
+
+import { BoundingBox } from '@/shared/design/type';
+import { ROTATION_ANCHOR_OFFSET, ROTATION_ANCHOR_SIZE } from '@/shared/design/constant';
 
 interface Props {
   boundingBox: BoundingBox;

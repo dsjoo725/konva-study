@@ -1,13 +1,15 @@
+import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
-
-import { ROTATION_ANCHOR_OFFSET } from '..';
 
 import { BoundingBox } from '@/shared/design/type';
 import { calculateAngle, degToRad, radToDeg } from '@/shared/@common/utils/math';
 import { useDesignActions, useDesignBoundingBoxes } from '@/shared/design/store';
-import { calculateRelativeTransform } from '@/shared/design/utils/calculateRelativeTransform';
-import { getAttrsTransform } from '@/shared/design/utils/getAttrsTransform';
-import Konva from 'konva';
+import { calculateRelativeTransform } from '@/shared/design/utils/transform';
+import { ROTATION_ANCHOR_OFFSET } from '@/shared/design/constant';
+import {
+  updateBoundingBoxesWithTransform,
+  updateSelectedShapesWithTransform,
+} from '@/shared/design/utils/transform';
 
 const ROTATION_SNAPS: number[] = [0, 90, 180, 270];
 const SNAP_TOL: number = 45;
@@ -75,42 +77,6 @@ const calculateRotateAngle = (x: number, y: number, boundingBox: BoundingBox, sc
   return snappedAngle - currentAngle;
 };
 
-const updateBoundingBoxesWithTransform = (
-  e: KonvaEventObject<DragEvent>,
-  boundingBoxes: BoundingBox[],
-  transform: Konva.Transform,
-) => {
-  const stage = e.target.getStage();
-  return boundingBoxes.map((boundingBox, index) => {
-    const shape = stage?.findOne(`.boundingBox-${index}`);
-    if (!(shape instanceof Konva.Shape)) return boundingBox;
-
-    const attrs = getAttrsTransform(shape, transform);
-
-    return {
-      ...boundingBox,
-      x: attrs.x,
-      y: attrs.y,
-      rotation: attrs.rotation,
-    };
-  });
-};
-
-const updateSelectedShapesWithTransform = (
-  selectedShapes: Konva.Shape[],
-  transform: Konva.Transform,
-) => {
-  return selectedShapes.map((shape) => {
-    const attrs = getAttrsTransform(shape, transform);
-    return {
-      id: shape.id(),
-      x: attrs.x,
-      y: attrs.y,
-      rotation: attrs.rotation,
-    };
-  });
-};
-
 const setPosition = (target: Konva.Node, boundingBox: BoundingBox) => {
   target.x(boundingBox.width / 2);
   target.y(boundingBox.height);
@@ -122,7 +88,7 @@ export const useHandleRotater = (
   scale: number,
 ) => {
   const boundingBoxes = useDesignBoundingBoxes();
-  const { updateBoundingBoxes, updateSelectedShapesRotation } = useDesignActions();
+  const { updateBoundingBoxes, updateSelectedShapes } = useDesignActions();
 
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const rotateAngle = calculateRotateAngle(e.target.x(), e.target.y(), boundingBox, scale);
@@ -144,7 +110,7 @@ export const useHandleRotater = (
     // 바운딩 박스들에 변환을 적용합니다.
     const newBoundingBoxes = updateBoundingBoxesWithTransform(e, boundingBoxes, transform);
 
-    updateSelectedShapesRotation(newShapes);
+    updateSelectedShapes(newShapes);
     updateBoundingBoxes(newBoundingBoxes);
 
     setPosition(e.target, boundingBox);

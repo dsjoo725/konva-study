@@ -15,7 +15,7 @@ const ShapesLayer = ({ x, y }: Props) => {
   return (
     <Layer name="shape-layer" x={x} y={y}>
       {shapes.map((shape) => {
-        switch (shape.type) {
+        switch (shape.shapeType) {
           case 'rectangle':
             return <Rectangle key={shape.id} rectangle={shape} />;
           case 'circle':

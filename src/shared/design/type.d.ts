@@ -1,6 +1,6 @@
 export type BaseShape = {
   id: string;
-  type: ShapeType;
+  shapeType: ShapeType;
   x: number;
   y: number;
   rotation: number;
@@ -9,24 +9,24 @@ export type BaseShape = {
 export type ShapeType = 'rectangle' | 'circle';
 
 export type RectangleShape = BaseShape & {
-  type: 'rectangle';
+  shapeType: 'rectangle';
   width: number;
   height: number;
   stroke: 'black';
   strokeWidth: number;
   fill: 'white';
 };
-export type RectangleConfig = Omit<RectangleShape, 'id' | 'type'>;
+export type RectangleConfig = Omit<RectangleShape, 'id' | 'shapeType'>;
 
 export type CircleShape = BaseShape & {
-  type: 'circle';
+  shapeType: 'circle';
   radiusX: number;
   radiusY: number;
   stroke: 'black';
   strokeWidth: number;
   fill: 'white';
 };
-export type CircleConfig = Omit<CircleShape, 'id' | 'type'>;
+export type CircleConfig = Omit<CircleShape, 'id' | 'shapeType'>;
 
 export type Shape = RectangleShape | CircleShape;
 

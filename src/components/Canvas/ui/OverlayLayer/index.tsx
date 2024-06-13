@@ -22,7 +22,7 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
   );
 
   return (
-    <Layer x={x} y={y}>
+    <Layer x={x} y={y} name="overlay-layer">
       <Group
         draggable
         onDragStart={handleDragStart}
@@ -35,13 +35,32 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
         ))}
         {boundingBoxes[0] && (
           <Group x={boundingBoxes[0].x} y={boundingBoxes[0].y} rotation={boundingBoxes[0].rotation}>
-            <Anchor name="top-left" x={0} y={0} scale={scale} />
-            <Anchor name="top-right" x={boundingBoxes[0].width} y={0} scale={scale} />
-            <Anchor name="bottom-left" x={0} y={boundingBoxes[0].height} scale={scale} />
+            <Anchor
+              name="top-left"
+              x={0}
+              y={0}
+              selectedShapes={selectedShapesRef.current}
+              scale={scale}
+            />
+            <Anchor
+              name="top-right"
+              x={boundingBoxes[0].width}
+              y={0}
+              selectedShapes={selectedShapesRef.current}
+              scale={scale}
+            />
+            <Anchor
+              name="bottom-left"
+              x={0}
+              y={boundingBoxes[0].height}
+              selectedShapes={selectedShapesRef.current}
+              scale={scale}
+            />
             <Anchor
               name="bottom-right"
               x={boundingBoxes[0].width}
               y={boundingBoxes[0].height}
+              selectedShapes={selectedShapesRef.current}
               scale={scale}
             />
             <Rotater

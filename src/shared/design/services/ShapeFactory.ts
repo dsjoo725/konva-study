@@ -17,7 +17,7 @@ class ShapeFactory {
   public createRectangle(rectangle: RectangleConfig): RectangleShape {
     return {
       id: uuidv4(),
-      type: 'rectangle',
+      shapeType: 'rectangle',
       ...rectangle,
     };
   }
@@ -25,7 +25,7 @@ class ShapeFactory {
   public createCircle(circle: CircleConfig): CircleShape {
     return {
       id: uuidv4(),
-      type: 'circle',
+      shapeType: 'circle',
       ...circle,
     };
   }

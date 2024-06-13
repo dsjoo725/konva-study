@@ -18,7 +18,7 @@ export type DesignStore = {
     updateBoundingBoxesPosition: (deltaX: number, deltaY: number) => void;
     updateSelectedShapesPosition: (deltaX: number, deltaY: number) => void;
 
-    updateSelectedShapesRotation: (newShapes: Pick<Shape, 'id' | 'x' | 'y' | 'rotation'>[]) => void;
+    updateSelectedShapes: (newShapes: Partial<Shape>[]) => void;
   };
 };
 
@@ -66,7 +66,7 @@ const useDesignStore = createStore<DesignStore>((set) => ({
         ),
       })),
 
-    updateSelectedShapesRotation: (newShapes) => {
+    updateSelectedShapes: (newShapes) => {
       set((state) => ({
         shapes: state.shapes.map((shape) => {
           const updatedShape = newShapes.find((newShape) => newShape.id === shape.id);
