@@ -2,11 +2,11 @@ import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
 
 import { useDesignActions, useDesignBoundingBoxes } from '@/shared/design/store';
-import { calculateRelativeTransform } from '@/shared/design/utils/transform';
 import { BoundingBox } from '@/shared/design/type';
 import {
+  calculateRelativeTransform,
   updateBoundingBoxesWithTransform,
-  updateSelectedShapesWithTransform,
+  updateShapesWithTransform,
 } from '@/shared/design/utils/transform';
 
 const MIN_WIDTH = 10 as const;
@@ -34,7 +34,7 @@ const setPosition = (topLeft: Konva.Node, bottomRight: Konva.Node, boundingBox: 
 
 export const useHandleAnchor = (selectedShapes: Konva.Shape[]) => {
   const boundingBoxes = useDesignBoundingBoxes();
-  const { updateBoundingBoxes, updateSelectedShapes } = useDesignActions();
+  const { updateBoundingBoxes, updateShapesAttrs } = useDesignActions();
 
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const anchor = e.target;
@@ -79,13 +79,13 @@ export const useHandleAnchor = (selectedShapes: Konva.Shape[]) => {
 
     const transform = calculateRelativeTransform(boundingBoxes[0], newBoundingBox);
 
-    // 선택된 도형들에 변환을 적용합니다.
-    const newShapes = updateSelectedShapesWithTransform(selectedShapes, transform);
     // 바운딩 박스들에 변환을 적용합니다.
     const newBoundingBoxes = updateBoundingBoxesWithTransform(e, boundingBoxes, transform);
+    // 선택된 도형들에 변환을 적용합니다.
+    const attrs = updateShapesWithTransform(selectedShapes, transform);
 
     updateBoundingBoxes(newBoundingBoxes);
-    updateSelectedShapes(newShapes);
+    updateShapesAttrs(attrs);
 
     setPosition(topLeft, bottomRight, newBoundingBox);
   };

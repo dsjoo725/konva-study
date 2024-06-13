@@ -69,11 +69,11 @@ export const getAttrsTransform = (shape: Konva.Shape, transform: Konva.Transform
   return newTransform.decompose();
 };
 
-export const updateSelectedShapesWithTransform = (
-  selectedShapes: Konva.Shape[],
+export const updateShapesWithTransform = (
+  shapes: Konva.Shape[],
   transform: Konva.Transform,
 ): Partial<Shape>[] => {
-  return selectedShapes.map((shape) => {
+  return shapes.map((shape) => {
     const attrs = getAttrsTransform(shape, transform);
 
     const offsetX = shape.strokeWidth() * (attrs.scaleX - 1);

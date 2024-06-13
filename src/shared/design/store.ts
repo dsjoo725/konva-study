@@ -8,17 +8,15 @@ export type DesignStore = {
   actions: {
     addShapes: (shapes: Shape[]) => void;
     updateShapePosition: (id: string, x: number, y: number) => void;
+    updateShapesAttrs: (attrs: Partial<Shape>[]) => void;
+    updateSelectedShapesPosition: (deltaX: number, deltaY: number) => void;
 
     addSelectedIds: (ids: string[]) => void;
     deleteSelectedIds: (ids: string[]) => void;
     updateSelectedIds: (ids: string[]) => void;
 
     updateBoundingBoxes: (boundingBoxes: BoundingBox[]) => void;
-
     updateBoundingBoxesPosition: (deltaX: number, deltaY: number) => void;
-    updateSelectedShapesPosition: (deltaX: number, deltaY: number) => void;
-
-    updateSelectedShapes: (newShapes: Partial<Shape>[]) => void;
   };
 };
 
@@ -37,10 +35,12 @@ const useDesignStore = createStore<DesignStore>((set) => ({
       })),
 
     updateSelectedIds: (ids) => set(() => ({ selectedIds: ids })),
+
     addSelectedIds: (ids) =>
       set((state) => ({
         selectedIds: [...state.selectedIds, ...ids.filter((id) => !state.selectedIds.includes(id))],
       })),
+
     deleteSelectedIds: (ids) =>
       set((state) => ({
         selectedIds: state.selectedIds.filter((id) => !ids.includes(id)),
@@ -66,10 +66,10 @@ const useDesignStore = createStore<DesignStore>((set) => ({
         ),
       })),
 
-    updateSelectedShapes: (newShapes) => {
+    updateShapesAttrs: (attrs) => {
       set((state) => ({
         shapes: state.shapes.map((shape) => {
-          const updatedShape = newShapes.find((newShape) => newShape.id === shape.id);
+          const updatedShape = attrs.find((attr) => attr.id === shape.id);
           return updatedShape ? { ...shape, ...updatedShape } : shape;
         }),
       }));

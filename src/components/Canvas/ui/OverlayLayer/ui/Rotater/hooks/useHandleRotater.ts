@@ -8,7 +8,7 @@ import { calculateRelativeTransform } from '@/shared/design/utils/transform';
 import { ROTATION_ANCHOR_OFFSET } from '@/shared/design/constant';
 import {
   updateBoundingBoxesWithTransform,
-  updateSelectedShapesWithTransform,
+  updateShapesWithTransform,
 } from '@/shared/design/utils/transform';
 
 const ROTATION_SNAPS: number[] = [0, 90, 180, 270];
@@ -88,7 +88,7 @@ export const useHandleRotater = (
   scale: number,
 ) => {
   const boundingBoxes = useDesignBoundingBoxes();
-  const { updateBoundingBoxes, updateSelectedShapes } = useDesignActions();
+  const { updateBoundingBoxes, updateShapesAttrs } = useDesignActions();
 
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const rotateAngle = calculateRotateAngle(e.target.x(), e.target.y(), boundingBox, scale);
@@ -105,13 +105,13 @@ export const useHandleRotater = (
     // 상대적인 변환을 계산합니다.
     const transform = calculateRelativeTransform(boundingBox, rotatedBoundingBox);
 
-    // 선택된 도형들에 변환을 적용합니다.
-    const newShapes = updateSelectedShapesWithTransform(selectedShapes, transform);
     // 바운딩 박스들에 변환을 적용합니다.
     const newBoundingBoxes = updateBoundingBoxesWithTransform(e, boundingBoxes, transform);
+    // 선택된 도형들에 변환을 적용합니다.
+    const attrs = updateShapesWithTransform(selectedShapes, transform);
 
-    updateSelectedShapes(newShapes);
     updateBoundingBoxes(newBoundingBoxes);
+    updateShapesAttrs(attrs);
 
     setPosition(e.target, boundingBox);
   };
