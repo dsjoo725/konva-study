@@ -6,7 +6,7 @@ export const DEFAULT_RECTANGLE_CONFIG: RectangleConfig = {
   width: 100,
   height: 200,
   stroke: 'black',
-  strokeWidth: 4,
+  strokeWidth: 2,
   fill: 'white',
   rotation: 0,
 };
@@ -17,7 +17,7 @@ export const DEFAULT_CIRCLE_CONFIG: CircleConfig = {
   radiusX: 100,
   radiusY: 100,
   stroke: 'black',
-  strokeWidth: 4,
+  strokeWidth: 2,
   fill: 'white',
   rotation: 0,
 };
