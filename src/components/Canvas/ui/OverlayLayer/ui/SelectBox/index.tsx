@@ -1,12 +1,16 @@
 import { Rect } from 'react-konva';
 
-const SelectBox = () => {
+interface Props {
+  scale: number;
+}
+const SelectBox = ({ scale }: Props) => {
   return (
     <Rect
-      name="selectbox"
+      name="select-box"
       fill="rgba(247, 107, 21, 0.1)"
       stroke="rgb(247, 107, 21, 1)"
-      visible={false}
+      scaleX={1 / scale}
+      scaleY={1 / scale}
     />
   );
 };

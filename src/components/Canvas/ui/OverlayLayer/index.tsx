@@ -22,7 +22,7 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
   );
 
   return (
-    <Layer x={x} y={y} onDragStart={handleDragStart}>
+    <Layer x={x} y={y}>
       <Group
         draggable
         onDragStart={handleDragStart}
@@ -52,7 +52,7 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
           </Group>
         )}
       </Group>
-      <SelectBox />
+      <SelectBox scale={scale} />
     </Layer>
   );
 };
