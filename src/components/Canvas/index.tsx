@@ -13,7 +13,7 @@ const Canvas = () => {
   const { handleMouseDown, handleMouseMove, handleMouseUp } = useHandleStage();
   const { containerRef, dimensions } = useContainerDimensions();
   const stageRef = useRef<Konva.Stage>(null);
-  const scale = 0.5;
+  const scale = 0.8;
 
   return (
     <div className={styles.layout} ref={containerRef}>

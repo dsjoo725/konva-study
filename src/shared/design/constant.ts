@@ -6,7 +6,7 @@ export const DEFAULT_RECTANGLE_CONFIG: RectangleConfig = {
   width: 100,
   height: 200,
   stroke: 'black',
-  strokeWidth: 20,
+  strokeWidth: 2,
   fill: 'white',
   rotation: 0,
 };
