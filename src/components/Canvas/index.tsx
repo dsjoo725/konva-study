@@ -7,6 +7,7 @@ import useContainerDimensions from './hooks/useContainerDimensions';
 import ShapesLayer from './ui/ShapesLayer';
 import OverlayLayer from './ui/OverlayLayer';
 import { useHandleStage } from './hooks/useHandleStage';
+import { BackgroudLayer } from './ui/BackgroudLayer';
 
 const Canvas = () => {
   const { handleMouseDown, handleMouseMove, handleMouseUp } = useHandleStage();
@@ -26,6 +27,7 @@ const Canvas = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
+        <BackgroudLayer x={100} y={100} />
         <ShapesLayer x={100} y={100} />
         <OverlayLayer stageRef={stageRef} x={100} y={100} scale={scale} />
       </Stage>

@@ -12,7 +12,7 @@ export const useHandleStage = () => {
     const stage = e.target.getStage();
     if (!stage) return;
 
-    const isStageClicked = e.target === stage;
+    const isStageClicked = e.target === stage || e.target.name().includes('bg');
     const pointerPosition = stage.getPointerPosition();
     if (!isStageClicked || !pointerPosition) return;
 
