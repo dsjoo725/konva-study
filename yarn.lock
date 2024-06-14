@@ -3557,6 +3557,42 @@ __metadata:
   languageName: node
   linkType: hard
 
+"konva-study@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "konva-study@workspace:."
+  dependencies:
+    "@rushstack/eslint-config": "npm:^3.6.10"
+    "@rushstack/eslint-patch": "npm:^1.10.3"
+    "@testing-library/jest-dom": "npm:^6.4.5"
+    "@testing-library/react": "npm:^15.0.7"
+    "@types/react": "npm:^18.2.66"
+    "@types/react-dom": "npm:^18.2.22"
+    "@types/uuid": "npm:^9.0.8"
+    "@vitejs/plugin-react": "npm:^4.2.1"
+    eslint: "npm:^8.57.0"
+    eslint-plugin-jsx-a11y: "npm:^6.8.0"
+    eslint-plugin-no-relative-import-paths: "npm:^1.5.4"
+    eslint-plugin-react: "npm:^7.34.1"
+    eslint-plugin-react-hooks: "npm:^4.6.0"
+    eslint-plugin-react-refresh: "npm:^0.4.6"
+    husky: "npm:^9.0.11"
+    immer: "npm:^10.1.1"
+    jsdom: "npm:^24.0.0"
+    konva: "npm:^9.3.11"
+    prettier: "npm:^3.2.5"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-konva: "npm:^18.2.10"
+    sass: "npm:^1.77.4"
+    typescript: "npm:^5.4.5"
+    uuid: "npm:^10.0.0"
+    vite: "npm:^5.2.0"
+    vite-tsconfig-paths: "npm:^4.3.2"
+    vitest: "npm:^1.6.0"
+    zustand: "npm:^4.5.2"
+  languageName: unknown
+  linkType: soft
+
 "konva@npm:^9.3.11":
   version: 9.3.11
   resolution: "konva@npm:9.3.11"
@@ -4284,42 +4320,6 @@ __metadata:
   checksum: 10c0/edc5ff89f51916f036c62ed433506b55446ff739358de77207e63e88a28ca2894caac6e73dcb68166a606e51c8087d32d400473e6a9fdd2dbe743f46c9c0276f
   languageName: node
   linkType: hard
-
-"print-studio@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "print-studio@workspace:."
-  dependencies:
-    "@rushstack/eslint-config": "npm:^3.6.10"
-    "@rushstack/eslint-patch": "npm:^1.10.3"
-    "@testing-library/jest-dom": "npm:^6.4.5"
-    "@testing-library/react": "npm:^15.0.7"
-    "@types/react": "npm:^18.2.66"
-    "@types/react-dom": "npm:^18.2.22"
-    "@types/uuid": "npm:^9.0.8"
-    "@vitejs/plugin-react": "npm:^4.2.1"
-    eslint: "npm:^8.57.0"
-    eslint-plugin-jsx-a11y: "npm:^6.8.0"
-    eslint-plugin-no-relative-import-paths: "npm:^1.5.4"
-    eslint-plugin-react: "npm:^7.34.1"
-    eslint-plugin-react-hooks: "npm:^4.6.0"
-    eslint-plugin-react-refresh: "npm:^0.4.6"
-    husky: "npm:^9.0.11"
-    immer: "npm:^10.1.1"
-    jsdom: "npm:^24.0.0"
-    konva: "npm:^9.3.11"
-    prettier: "npm:^3.2.5"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-konva: "npm:^18.2.10"
-    sass: "npm:^1.77.4"
-    typescript: "npm:^5.4.5"
-    uuid: "npm:^10.0.0"
-    vite: "npm:^5.2.0"
-    vite-tsconfig-paths: "npm:^4.3.2"
-    vitest: "npm:^1.6.0"
-    zustand: "npm:^4.5.2"
-  languageName: unknown
-  linkType: soft
 
 "proc-log@npm:^3.0.0":
   version: 3.0.0

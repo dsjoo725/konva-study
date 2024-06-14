@@ -15,7 +15,7 @@ const MIN_HEIGHT = 10 as const;
 const calculateNewBoundingBox = (
   topLeft: Konva.Node,
   bottomRight: Konva.Node,
-  rotation: number,
+  boundingBox: BoundingBox,
   overlayLayer?: Konva.Node,
 ) => {
   return {
@@ -23,7 +23,7 @@ const calculateNewBoundingBox = (
     y: topLeft.getAbsolutePosition(overlayLayer).y,
     width: Math.max(bottomRight.x() - topLeft.x(), MIN_WIDTH),
     height: Math.max(bottomRight.y() - topLeft.y(), MIN_HEIGHT),
-    rotation: rotation,
+    rotation: boundingBox.rotation,
   };
 };
 
@@ -45,17 +45,22 @@ export const useHandleAnchor = (selectedShapes: Konva.Shape[]) => {
 
     if (!topLeft || !bottomRight) return;
 
+    // 최소 크기일때 도형이 계속 움직이는 것을 방지합니다.
+    const topLeftMinX = Math.min(anchor.x(), bottomRight.x() - MIN_WIDTH);
+    const topLeftMinY = Math.min(anchor.y(), bottomRight.y() - MIN_HEIGHT);
+
     // 각 앵커의 위치를 기반으로 topLeft와 bottomRight 위치를 업데이트합니다.
     switch (anchorName) {
       case 'top-left-anchor':
+        anchor.position({ x: topLeftMinX, y: topLeftMinY });
         break;
       case 'top-right-anchor':
-        topLeft.y(anchor.y());
         bottomRight.x(anchor.x());
+        topLeft.y(topLeftMinY);
         anchor.position({ x: boundingBoxes[0].width, y: 0 });
         break;
       case 'bottom-left-anchor':
-        topLeft.x(anchor.x());
+        topLeft.x(topLeftMinX);
         bottomRight.y(anchor.y());
         anchor.position({ x: 0, y: boundingBoxes[0].height });
         break;
@@ -68,7 +73,7 @@ export const useHandleAnchor = (selectedShapes: Konva.Shape[]) => {
     const newBoundingBox = calculateNewBoundingBox(
       topLeft,
       bottomRight,
-      boundingBoxes[0].rotation,
+      boundingBoxes[0],
       overlayLayer,
     );
 
