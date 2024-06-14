@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@rushstack/eslint-patch", "npm:1.10.3"],\
           ["@testing-library/jest-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:6.4.5"],\
           ["@testing-library/react", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:15.0.7"],\
+          ["@types/lodash", "npm:4.17.5"],\
           ["@types/react", "npm:18.3.2"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/uuid", "npm:9.0.8"],\
@@ -45,6 +46,7 @@ const RAW_RUNTIME_STATE =
           ["immer", "npm:10.1.1"],\
           ["jsdom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:24.0.0"],\
           ["konva", "npm:9.3.11"],\
+          ["lodash", "npm:4.17.21"],\
           ["prettier", "npm:3.2.5"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.3.1"],\
@@ -1307,6 +1309,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../Users/dsjoo/AppData/Local/Yarn/Berry/cache/@types-json-schema-npm-7.0.15-fd16381786-10c0.zip/node_modules/@types/json-schema/",\
         "packageDependencies": [\
           ["@types/json-schema", "npm:7.0.15"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/lodash", [\
+      ["npm:4.17.5", {\
+        "packageLocation": "../../Users/dsjoo/AppData/Local/Yarn/Berry/cache/@types-lodash-npm-4.17.5-81b8d6a8ab-10c0.zip/node_modules/@types/lodash/",\
+        "packageDependencies": [\
+          ["@types/lodash", "npm:4.17.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4350,6 +4361,7 @@ const RAW_RUNTIME_STATE =
           ["@rushstack/eslint-patch", "npm:1.10.3"],\
           ["@testing-library/jest-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:6.4.5"],\
           ["@testing-library/react", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:15.0.7"],\
+          ["@types/lodash", "npm:4.17.5"],\
           ["@types/react", "npm:18.3.2"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/uuid", "npm:9.0.8"],\
@@ -4364,6 +4376,7 @@ const RAW_RUNTIME_STATE =
           ["immer", "npm:10.1.1"],\
           ["jsdom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:24.0.0"],\
           ["konva", "npm:9.3.11"],\
+          ["lodash", "npm:4.17.21"],\
           ["prettier", "npm:3.2.5"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.3.1"],\

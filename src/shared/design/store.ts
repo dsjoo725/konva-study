@@ -7,6 +7,7 @@ export type DesignStore = {
   boundingBoxes: BoundingBox[];
   actions: {
     addShapes: (shapes: Shape[]) => void;
+    removeShapes: (ids: string[]) => void;
     updateShapePosition: (id: string, x: number, y: number) => void;
     updateShapeAttributes: (attributes: (Partial<Shape> & { id: string })[]) => void;
     moveSelectedShapes: (deltaX: number, deltaY: number) => void;
@@ -29,6 +30,13 @@ const useDesignStore = createStore<DesignStore>((set) => ({
     addShapes: (shapes) =>
       set((state) => ({
         shapes: [...state.shapes, ...shapes],
+      })),
+
+    // 도형 삭제
+    removeShapes: (ids: string[]) =>
+      set((state) => ({
+        shapes: state.shapes.filter((shape) => !ids.includes(shape.id)),
+        selectedShapeIds: state.selectedShapeIds.filter((id) => !ids.includes(id)),
       })),
 
     // 도형 위치 업데이트

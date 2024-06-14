@@ -8,15 +8,18 @@ import ShapesLayer from './ui/ShapesLayer';
 import OverlayLayer from './ui/OverlayLayer';
 import { useHandleStage } from './hooks/useHandleStage';
 import { BackgroudLayer } from './ui/BackgroudLayer';
+import { useHandleKeyboard } from './hooks/useHandleKeyboard';
 
 const Canvas = () => {
   const { handleMouseDown, handleMouseMove, handleMouseUp } = useHandleStage();
+  const { handleKeydown } = useHandleKeyboard();
   const { containerRef, dimensions } = useContainerDimensions();
+
   const stageRef = useRef<Konva.Stage>(null);
   const scale = 0.8;
 
   return (
-    <div className={styles.layout} ref={containerRef}>
+    <div className={styles.layout} ref={containerRef} tabIndex={0} onKeyDown={handleKeydown}>
       <Stage
         ref={stageRef}
         width={dimensions.width}

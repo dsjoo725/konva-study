@@ -34,6 +34,7 @@ const Toolbar = () => {
           <li key={id}>{id}</li>
         ))}
       </ul>
+      <input />
     </div>
   );
 };
