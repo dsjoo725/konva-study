@@ -39,6 +39,7 @@ export type TextShape = BaseShape & {
   text: string;
   align: TextAlign;
   isReverse: boolean;
+  isEdit: boolean;
 };
 export type TextConfig = Omit<TextShape, 'id' | 'shapeType'>;
 

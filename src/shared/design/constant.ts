@@ -30,6 +30,7 @@ export const DEFAULT_TEXT_CONFIG: TextConfig = {
   fontSize: 32,
   fontStyle: [],
   isReverse: false,
+  isEdit: false,
   rotation: 0,
   text: 'Text Object',
 };

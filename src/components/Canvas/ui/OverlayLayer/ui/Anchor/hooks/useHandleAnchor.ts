@@ -9,10 +9,9 @@ import {
   transformShapeAttributes,
 } from '@/shared/design/utils/transform';
 import { calculateDistance, calculateSinCos } from '@/shared/@common/utils/math';
-import { Vector2d } from 'konva/lib/types';
 
-const MIN_WIDTH = 100 as const;
-const MIN_HEIGHT = 100 as const;
+const MIN_WIDTH = 10 as const;
+const MIN_HEIGHT = 10 as const;
 
 const calculateNewBoundingBox = (
   topLeft: Konva.Node,

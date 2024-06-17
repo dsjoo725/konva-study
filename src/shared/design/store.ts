@@ -16,6 +16,7 @@ export type DesignStore = {
     setSelectedShapeIds: (ids: string[]) => void;
     setBoundingBoxes: (boundingBoxes: BoundingBox[]) => void;
     moveBoundingBoxes: (deltaX: number, deltaY: number) => void;
+    switchTextEdit: (id: string) => void;
   };
 };
 
@@ -99,6 +100,15 @@ const useDesignStore = createStore<DesignStore>((set) => ({
           x: boundingBox.x + deltaX,
           y: boundingBox.y + deltaY,
         })),
+      })),
+
+    switchTextEdit: (id: string) =>
+      set((state) => ({
+        shapes: state.shapes.map((shape) =>
+          shape.id === id && shape.shapeType === 'text'
+            ? { ...shape, isEdit: !shape.isEdit }
+            : shape,
+        ),
       })),
   },
 }));

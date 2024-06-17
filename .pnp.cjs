@@ -44,6 +44,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:0.4.7"],\
           ["husky", "npm:9.0.11"],\
           ["immer", "npm:10.1.1"],\
+          ["its-fine", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.2.5"],\
           ["jsdom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:24.0.0"],\
           ["konva", "npm:9.3.11"],\
           ["lodash", "npm:4.17.21"],\
@@ -51,6 +52,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.3.1"],\
           ["react-konva", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.2.10"],\
+          ["react-konva-utils", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.0.6"],\
           ["sass", "npm:1.77.4"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["uuid", "npm:10.0.0"],\
@@ -4162,10 +4164,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:3d14c8666b7914bddaec78a672963084e89c1bde80bfa386724654fcf6dff29af3e11154ad52acb34b26b4817ebbbe650d08dd36154365f9f97075233889af80#npm:1.2.5", {\
-        "packageLocation": "./.yarn/__virtual__/its-fine-virtual-95c1bcc4ae/3/Users/dsjoo/AppData/Local/Yarn/Berry/cache/its-fine-npm-1.2.5-e6a757d915-10c0.zip/node_modules/its-fine/",\
+      ["virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.2.5", {\
+        "packageLocation": "./.yarn/__virtual__/its-fine-virtual-5e735633f7/3/Users/dsjoo/AppData/Local/Yarn/Berry/cache/its-fine-npm-1.2.5-e6a757d915-10c0.zip/node_modules/its-fine/",\
         "packageDependencies": [\
-          ["its-fine", "virtual:3d14c8666b7914bddaec78a672963084e89c1bde80bfa386724654fcf6dff29af3e11154ad52acb34b26b4817ebbbe650d08dd36154365f9f97075233889af80#npm:1.2.5"],\
+          ["its-fine", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.2.5"],\
           ["@types/react", "npm:18.3.2"],\
           ["@types/react-reconciler", "npm:0.28.8"],\
           ["react", "npm:18.3.1"]\
@@ -4374,6 +4376,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:0.4.7"],\
           ["husky", "npm:9.0.11"],\
           ["immer", "npm:10.1.1"],\
+          ["its-fine", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.2.5"],\
           ["jsdom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:24.0.0"],\
           ["konva", "npm:9.3.11"],\
           ["lodash", "npm:4.17.21"],\
@@ -4381,6 +4384,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.3.1"],\
           ["react-konva", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.2.10"],\
+          ["react-konva-utils", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.0.6"],\
           ["sass", "npm:1.77.4"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["uuid", "npm:10.0.0"],\
@@ -5344,12 +5348,44 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.3.2"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/react-reconciler", "npm:0.28.8"],\
-          ["its-fine", "virtual:3d14c8666b7914bddaec78a672963084e89c1bde80bfa386724654fcf6dff29af3e11154ad52acb34b26b4817ebbbe650d08dd36154365f9f97075233889af80#npm:1.2.5"],\
+          ["its-fine", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.2.5"],\
           ["konva", "npm:9.3.11"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.3.1"],\
           ["react-reconciler", "virtual:3d14c8666b7914bddaec78a672963084e89c1bde80bfa386724654fcf6dff29af3e11154ad52acb34b26b4817ebbbe650d08dd36154365f9f97075233889af80#npm:0.29.2"],\
           ["scheduler", "npm:0.23.2"]\
+        ],\
+        "packagePeers": [\
+          "@types/konva",\
+          "@types/react-dom",\
+          "@types/react",\
+          "konva",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-konva-utils", [\
+      ["npm:1.0.6", {\
+        "packageLocation": "../../Users/dsjoo/AppData/Local/Yarn/Berry/cache/react-konva-utils-npm-1.0.6-26928a8901-10c0.zip/node_modules/react-konva-utils/",\
+        "packageDependencies": [\
+          ["react-konva-utils", "npm:1.0.6"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.0.6", {\
+        "packageLocation": "./.yarn/__virtual__/react-konva-utils-virtual-5ebac1646e/3/Users/dsjoo/AppData/Local/Yarn/Berry/cache/react-konva-utils-npm-1.0.6-26928a8901-10c0.zip/node_modules/react-konva-utils/",\
+        "packageDependencies": [\
+          ["react-konva-utils", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:1.0.6"],\
+          ["@types/konva", null],\
+          ["@types/react", "npm:18.3.2"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["konva", "npm:9.3.11"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.3.1"],\
+          ["react-konva", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.2.10"],\
+          ["use-image", "virtual:5ebac1646ef45a7b9c79d7739b766e2b7f9cae6bd506c3b3a4e23550b4b2db6f1b97d3434eed4bda01b8fb473779ddfabb9764be778961f06bf39aa62a993e9f#npm:1.1.1"]\
         ],\
         "packagePeers": [\
           "@types/konva",\
@@ -6321,6 +6357,32 @@ const RAW_RUNTIME_STATE =
           ["url-parse", "npm:1.5.10"],\
           ["querystringify", "npm:2.2.0"],\
           ["requires-port", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["use-image", [\
+      ["npm:1.1.1", {\
+        "packageLocation": "../../Users/dsjoo/AppData/Local/Yarn/Berry/cache/use-image-npm-1.1.1-210604bd52-10c0.zip/node_modules/use-image/",\
+        "packageDependencies": [\
+          ["use-image", "npm:1.1.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:5ebac1646ef45a7b9c79d7739b766e2b7f9cae6bd506c3b3a4e23550b4b2db6f1b97d3434eed4bda01b8fb473779ddfabb9764be778961f06bf39aa62a993e9f#npm:1.1.1", {\
+        "packageLocation": "./.yarn/__virtual__/use-image-virtual-6050fe5e9e/3/Users/dsjoo/AppData/Local/Yarn/Berry/cache/use-image-npm-1.1.1-210604bd52-10c0.zip/node_modules/use-image/",\
+        "packageDependencies": [\
+          ["use-image", "virtual:5ebac1646ef45a7b9c79d7739b766e2b7f9cae6bd506c3b3a4e23550b4b2db6f1b97d3434eed4bda01b8fb473779ddfabb9764be778961f06bf39aa62a993e9f#npm:1.1.1"],\
+          ["@types/react", "npm:18.3.2"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:f16e43c854e69f4e1b74169f5dca65ede0aedd5a1df3c5c43f201e50e051a0e275396f4338b14a55d24a58a2d3dc77b464ec52b996d4812ff6cee07d0f292683#npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\

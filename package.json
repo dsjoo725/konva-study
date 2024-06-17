@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "immer": "^10.1.1",
+    "its-fine": "^1.2.5",
     "konva": "^9.3.11",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-konva": "^18.2.10",
+    "react-konva-utils": "^1.0.6",
     "sass": "^1.77.4",
     "uuid": "^10.0.0",
     "zustand": "^4.5.2"

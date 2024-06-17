@@ -11,6 +11,7 @@ export const useHandleTransformer = (selectedShapes: Konva.Shape[]) => {
     removeSelectedShapeIds,
     moveBoundingBoxes,
     moveSelectedShapes,
+    switchTextEdit,
   } = useDesignActions();
   const selectedIDs = useSelectedShapeIds();
   const startPoints = useRef<Vector2d | null>(null);
@@ -81,6 +82,9 @@ export const useHandleTransformer = (selectedShapes: Konva.Shape[]) => {
       } else if (selectedIDs.length > 1) {
         // 다른 도형이 선택되어 있는 경우 해당 도형만 선택합니다.
         setSelectedShapeIds([targetShapeId]);
+      } else if (targetShape instanceof Konva.Text) {
+        // 선택된 텍스트인 경우 텍스트 편집 모드로 전환합니다.
+        switchTextEdit(targetShapeId);
       }
     } else {
       if (isCtrlOrShiftPressed) {

@@ -3407,7 +3407,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"its-fine@npm:^1.1.1":
+"its-fine@npm:^1.1.1, its-fine@npm:^1.2.5":
   version: 1.2.5
   resolution: "its-fine@npm:1.2.5"
   dependencies:
@@ -3585,6 +3585,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.6"
     husky: "npm:^9.0.11"
     immer: "npm:^10.1.1"
+    its-fine: "npm:^1.2.5"
     jsdom: "npm:^24.0.0"
     konva: "npm:^9.3.11"
     lodash: "npm:^4.17.21"
@@ -3592,6 +3593,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-konva: "npm:^18.2.10"
+    react-konva-utils: "npm:^1.0.6"
     sass: "npm:^1.77.4"
     typescript: "npm:^5.4.5"
     uuid: "npm:^10.0.0"
@@ -4426,7 +4428,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-konva@npm:^18.2.10":
+"react-konva-utils@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "react-konva-utils@npm:1.0.6"
+  dependencies:
+    react-konva: "npm:^18.0.0-0"
+    use-image: "npm:^1.1.0"
+  peerDependencies:
+    konva: ^8.3.5 || ^9.0.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 10c0/fe0221875d5851034bb5480bd0449dbb833a078d8546b9fde06052242352a3baeacd4b2d7530b3dac36891664e53aa87c2f02fe5d3a1a4377bbd393eb252b02b
+  languageName: node
+  linkType: hard
+
+"react-konva@npm:^18.0.0-0, react-konva@npm:^18.2.10":
   version: 18.2.10
   resolution: "react-konva@npm:18.2.10"
   dependencies:
@@ -5335,6 +5351,16 @@ __metadata:
     querystringify: "npm:^2.1.1"
     requires-port: "npm:^1.0.0"
   checksum: 10c0/bd5aa9389f896974beb851c112f63b466505a04b4807cea2e5a3b7092f6fbb75316f0491ea84e44f66fed55f1b440df5195d7e3a8203f64fcefa19d182f5be87
+  languageName: node
+  linkType: hard
+
+"use-image@npm:^1.1.0":
+  version: 1.1.1
+  resolution: "use-image@npm:1.1.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10c0/062704b42348116720e31730821b80f5cdc2f3c3ee8a66a3b414a17baed47b0f7a628f86d7641a3f3e60303461792816211f94878d11e01faf8a327e745c3e2a
   languageName: node
   linkType: hard
 
