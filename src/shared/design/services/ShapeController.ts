@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { DebouncedFunc, debounce } from 'lodash';
-import { BoundingBox, Shape } from '@/shared/design/type';
+import { Shape } from '@/shared/design/type';
 
 class ShapeController {
   private static instance: ShapeController;
