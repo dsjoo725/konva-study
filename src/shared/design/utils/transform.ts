@@ -122,6 +122,22 @@ export const transformShapeAttributes = (
           radiusY: cirlce.radiusY() * attrs.scaleY + offsetY,
           rotation: attrs.rotation,
         };
+      case 'text':
+        const text = shape as Konva.Text;
+        return {
+          id: text.id(),
+          x: attrs.x - offsetX / 2,
+          y: attrs.y - offsetY / 2,
+          fontSize: text.fontSize() * attrs.scaleX,
+          rotation: attrs.rotation,
+        };
+      default:
+        return {
+          id: shape.id(),
+          x: attrs.x - offsetX / 2,
+          y: attrs.y - offsetY / 2,
+          rotation: attrs.rotation,
+        };
     }
   });
 };

@@ -6,7 +6,7 @@ export type BaseShape = {
   rotation: number;
 };
 
-export type ShapeType = 'rectangle' | 'circle';
+export type ShapeType = 'rectangle' | 'circle' | 'text';
 
 export type RectangleShape = BaseShape & {
   shapeType: 'rectangle';
@@ -28,7 +28,21 @@ export type CircleShape = BaseShape & {
 };
 export type CircleConfig = Omit<CircleShape, 'id' | 'shapeType'>;
 
-export type Shape = RectangleShape | CircleShape;
+export type FontStyle = 'italic' | 'bold';
+export type TextAlign = 'left' | 'center' | 'right';
+
+export type TextShape = BaseShape & {
+  shapeType: 'text';
+  fontFamily: string;
+  fontSize: number;
+  fontStyle: FontStyle[];
+  text: string;
+  align: TextAlign;
+  isReverse: boolean;
+};
+export type TextConfig = Omit<TextShape, 'id' | 'shapeType'>;
+
+export type Shape = RectangleShape | CircleShape | TextShape;
 
 export type BoundingBox = {
   x: number;

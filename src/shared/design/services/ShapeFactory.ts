@@ -1,6 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { CircleConfig, CircleShape, RectangleConfig, RectangleShape } from '@/shared/design/type';
+import {
+  CircleConfig,
+  CircleShape,
+  RectangleConfig,
+  RectangleShape,
+  TextConfig,
+  TextShape,
+} from '@/shared/design/type';
 
 class ShapeFactory {
   private static instance: ShapeFactory;
@@ -27,6 +34,14 @@ class ShapeFactory {
       id: uuidv4(),
       shapeType: 'circle',
       ...circle,
+    };
+  }
+
+  public createText(text: TextConfig): TextShape {
+    return {
+      id: uuidv4(),
+      shapeType: 'text',
+      ...text,
     };
   }
 }

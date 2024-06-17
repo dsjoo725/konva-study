@@ -4,6 +4,7 @@ import { useShapes } from '@/shared/design/store';
 
 import Rectangle from './ui/Rectangle';
 import Circle from './ui/Cirlce';
+import Text from './ui/Text';
 
 interface Props {
   x: number;
@@ -20,6 +21,8 @@ const ShapesLayer = ({ x, y }: Props) => {
             return <Rectangle key={shape.id} rectangle={shape} />;
           case 'circle':
             return <Circle key={shape.id} circle={shape} />;
+          case 'text':
+            return <Text key={shape.id} text={shape} />;
           default:
             return null;
         }

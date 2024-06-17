@@ -1,3 +1,5 @@
+import { BoundingBox } from '@/shared/design/type';
+
 /**
  * @name radToDeg
  * @description
@@ -74,4 +76,13 @@ export const calculateDistance = (x1: number, y1: number, x2: number, y2: number
   const deltaX = x2 - x1;
   const deltaY = y2 - y1;
   return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+};
+
+export const calculateSinCos = (boundingBox: BoundingBox) => {
+  const hypotenuse = Math.sqrt(Math.pow(boundingBox.width, 2) + Math.pow(boundingBox.height, 2));
+
+  const sin = Math.abs(boundingBox.height / hypotenuse);
+  const cos = Math.abs(boundingBox.width / hypotenuse);
+
+  return { sin, cos };
 };

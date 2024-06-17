@@ -39,7 +39,7 @@ export const useUpdateCanvas = (paper: Dimensions) => {
   // useRef를 사용하여 debounced 함수의 인스턴스를 생성하고,
   // 컴포넌트의 생애 주기 동안 이 인스턴스가 재생성되지 않도록 합니다.
   // 이는 useEffect의 의존성 배열에 안정적인 참조를 제공하여 불필요한 리렌더링을 방지합니다.
-  const debouncedUpdateCanvas = useRef(debounce(adjustCanvas, 1000)).current;
+  const debouncedUpdateCanvas = useRef(debounce(adjustCanvas, 400)).current;
 
   useEffect(() => {
     debouncedUpdateCanvas();
