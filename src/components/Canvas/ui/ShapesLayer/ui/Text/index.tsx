@@ -1,7 +1,7 @@
 import { Text as KonvaText } from 'react-konva';
 
 import { useHandleShape } from '@/shared/design/hooks/useHandleShape';
-import { TextShape } from '@/shared/design/type';
+import { TextAlign, TextShape } from '@/shared/design/type';
 import { Html } from 'react-konva-utils';
 
 import { useCanvas } from '@/shared/canvas/store';
@@ -16,12 +16,28 @@ const Text = ({ text }: Props) => {
   const { textRef, inputValue, handleBlur, handleFocus, handleKeyDown, handleChange } =
     useHandleText(text);
 
+  const alignOffset = (align: TextAlign) => {
+    if (!textRef.current) return 0;
+
+    switch (align) {
+      case 'left':
+        return 0;
+      case 'center':
+        return textRef.current.width() / 2;
+      case 'right':
+        return textRef.current.width();
+      default:
+        return 0;
+    }
+  };
+
   return (
     <>
       <KonvaText
         ref={textRef}
         {...text}
         fontStyle={text.fontStyle.length === 0 ? 'normal' : text.fontStyle.join(' ')}
+        offsetX={alignOffset(text.align)}
         lineHeight={1.2}
         draggable
         onDragEnd={handleDragEnd(text.id)}
@@ -31,7 +47,10 @@ const Text = ({ text }: Props) => {
       {text.isEdit && textRef.current && (
         <Html
           divProps={{
-            style: { top: `${text.y * canvas.scale}px`, left: `${text.x * canvas.scale}px` },
+            style: {
+              top: `${text.y * canvas.scale}px`,
+              left: `${text.x * canvas.scale - alignOffset(text.align) * canvas.scale}px`,
+            },
           }}
         >
           <textarea
@@ -52,6 +71,7 @@ const Text = ({ text }: Props) => {
               fontFamily: textRef.current.fontFamily(),
               fontWeight: textRef.current.fontStyle().includes('bold') ? 'bold' : 'normal',
               fontStyle: textRef.current.fontStyle().includes('italic') ? 'italic' : 'normal',
+              textAlign: textRef.current.align() as TextAlign,
               transform: `rotateZ(${textRef.current?.rotation()}deg) scaleX(${1 / canvas.scale}) scaleY(${1 / canvas.scale})`,
               transformOrigin: 'left top',
             }}

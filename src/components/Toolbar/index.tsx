@@ -4,7 +4,7 @@ import {
   DEFAULT_RECTANGLE_CONFIG,
   DEFAULT_TEXT_CONFIG,
 } from '@/shared/design/constant';
-import { useSelectedShapeIds, useShapes } from '@/shared/design/store';
+import { useDesignActions, useSelectedShapeIds, useShapes } from '@/shared/design/store';
 
 import styles from './styles.module.scss';
 
@@ -12,6 +12,7 @@ const Toolbar = () => {
   const shapes = useShapes();
   const selectedIds = useSelectedShapeIds();
   const { createCircle, createRectangle, createText } = useCreateShape();
+  const { updateShapeAttributes } = useDesignActions();
 
   return (
     <div className={styles.layout}>
@@ -40,6 +41,28 @@ const Toolbar = () => {
         ))}
       </ul>
       <input />
+
+      <button
+        onClick={() => {
+          updateShapeAttributes([{ id: selectedIds[0], align: 'left' }]);
+        }}
+      >
+        left
+      </button>
+      <button
+        onClick={() => {
+          updateShapeAttributes([{ id: selectedIds[0], align: 'center' }]);
+        }}
+      >
+        center
+      </button>
+      <button
+        onClick={() => {
+          updateShapeAttributes([{ id: selectedIds[0], align: 'right' }]);
+        }}
+      >
+        right
+      </button>
     </div>
   );
 };
