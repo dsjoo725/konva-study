@@ -85,6 +85,7 @@ export const useHandleTransformer = (selectedShapes: Konva.Shape[]) => {
       } else if (targetShape instanceof Konva.Text) {
         // 선택된 텍스트인 경우 텍스트 편집 모드로 전환합니다.
         switchTextEdit(targetShapeId);
+        setSelectedShapeIds([]);
       }
     } else {
       if (isCtrlOrShiftPressed) {

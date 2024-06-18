@@ -3,10 +3,9 @@ import { Text as KonvaText } from 'react-konva';
 import { useHandleShape } from '@/shared/design/hooks/useHandleShape';
 import { TextShape } from '@/shared/design/type';
 import { Html } from 'react-konva-utils';
-import { useDesignActions } from '@/shared/design/store';
+
 import { useCanvas } from '@/shared/canvas/store';
-import Konva from 'konva';
-import { useRef } from 'react';
+import { useHandleText } from './hooks/useHandleText';
 
 interface Props {
   text: TextShape;
@@ -14,9 +13,8 @@ interface Props {
 const Text = ({ text }: Props) => {
   const canvas = useCanvas();
   const { handleDragEnd, handleClick } = useHandleShape();
-  const { switchTextEdit } = useDesignActions();
-
-  const textRef = useRef<Konva.Text>(null);
+  const { textRef, inputValue, handleBlur, handleFocus, handleKeyDown, handleChange } =
+    useHandleText(text);
 
   return (
     <>
@@ -24,36 +22,43 @@ const Text = ({ text }: Props) => {
         ref={textRef}
         {...text}
         fontStyle={text.fontStyle.length === 0 ? 'normal' : text.fontStyle.join(' ')}
+        lineHeight={1.2}
         draggable
         onDragEnd={handleDragEnd(text.id)}
         onClick={handleClick(text.id)}
         visible={!text.isEdit}
       />
-      {text.isEdit && (
+      {text.isEdit && textRef.current && (
         <Html
           divProps={{
             style: { top: `${text.y * canvas.scale}px`, left: `${text.x * canvas.scale}px` },
           }}
         >
           <textarea
-            value={text.text}
+            value={inputValue}
             spellCheck={false}
             autoFocus
             style={{
+              boxSizing: 'content-box',
+              outline: '2px solid rgb(255, 130, 100)',
               border: 'none',
-              outline: 'none',
               background: 'none',
               overflow: 'hidden',
               resize: 'none',
-              width: `${textRef.current?.width()}px`,
-              height: `${textRef.current?.height()}px`,
-              fontSize: `${textRef.current?.fontSize()}px`,
-              fontFamily: textRef.current?.fontFamily(),
-              lineHeight: textRef.current?.lineHeight(),
+              width: `${textRef.current.width() * canvas.scale}px`,
+              height: `${textRef.current.height() * canvas.scale}px`,
+              lineHeight: textRef.current.lineHeight(),
+              fontSize: `${textRef.current.fontSize() * canvas.scale}px`,
+              fontFamily: textRef.current.fontFamily(),
+              fontWeight: textRef.current.fontStyle().includes('bold') ? 'bold' : 'normal',
+              fontStyle: textRef.current.fontStyle().includes('italic') ? 'italic' : 'normal',
+              transform: `rotateZ(${textRef.current?.rotation()}deg) scaleX(${1 / canvas.scale}) scaleY(${1 / canvas.scale})`,
+              transformOrigin: 'left top',
             }}
-            onBlur={() => {
-              switchTextEdit(text.id);
-            }}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
           />
         </Html>
       )}
