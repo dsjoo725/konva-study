@@ -1,10 +1,12 @@
 import { Layer } from 'react-konva';
 
-import { useShapes } from '@/shared/design/store';
+import { useDesignActions, useShapes } from '@/shared/design/store';
 
 import Rectangle from './ui/Rectangle';
 import Circle from './ui/Cirlce';
 import Text from './ui/Text';
+import Konva from 'konva';
+import { useEffect, useRef } from 'react';
 
 interface Props {
   x: number;
@@ -12,9 +14,17 @@ interface Props {
 }
 const ShapesLayer = ({ x, y }: Props) => {
   const shapes = useShapes();
+  const { setShapeLayer } = useDesignActions();
+  const shapeLayerRef = useRef<Konva.Layer>(null);
+
+  useEffect(() => {
+    if (!shapeLayerRef.current) return;
+
+    setShapeLayer(shapeLayerRef.current);
+  });
 
   return (
-    <Layer name="shape-layer" x={x} y={y}>
+    <Layer name="shape-layer" ref={shapeLayerRef} x={x} y={y}>
       {shapes.map((shape) => {
         switch (shape.shapeType) {
           case 'rectangle':

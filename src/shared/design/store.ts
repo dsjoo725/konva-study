@@ -1,22 +1,32 @@
 import { createStore } from '@/shared/@common/createStore';
 import { BoundingBox, Shape } from './type';
+import Konva from 'konva';
 
 export type DesignStore = {
   shapes: Shape[];
   selectedShapeIds: string[];
   boundingBoxes: BoundingBox[];
+
+  shapeLayer: Konva.Layer | undefined;
+
   actions: {
     addShapes: (shapes: Shape[]) => void;
     removeShapes: (ids: string[]) => void;
     updateShapePosition: (id: string, x: number, y: number) => void;
     updateShapeAttributes: (attributes: (Partial<Shape> & { id: string })[]) => void;
-    moveSelectedShapes: (deltaX: number, deltaY: number) => void;
+
     addSelectedShapeIds: (ids: string[]) => void;
     removeSelectedShapeIds: (ids: string[]) => void;
     setSelectedShapeIds: (ids: string[]) => void;
+
+    moveSelectedShapes: (deltaX: number, deltaY: number) => void;
+
     setBoundingBoxes: (boundingBoxes: BoundingBox[]) => void;
     moveBoundingBoxes: (deltaX: number, deltaY: number) => void;
+
     switchTextEdit: (id: string) => void;
+
+    setShapeLayer: (layer: Konva.Layer) => void;
   };
 };
 
@@ -25,6 +35,8 @@ const useDesignStore = createStore<DesignStore>((set) => ({
   shapes: [],
   selectedShapeIds: [],
   boundingBoxes: [],
+
+  shapeLayer: undefined,
 
   actions: {
     // 도형 추가
@@ -110,6 +122,8 @@ const useDesignStore = createStore<DesignStore>((set) => ({
             : shape,
         ),
       })),
+
+    setShapeLayer: (shapeLayer) => set(() => ({ shapeLayer })),
   },
 }));
 
@@ -117,3 +131,4 @@ export const useDesignActions = () => useDesignStore((state) => state.actions);
 export const useShapes = () => useDesignStore((state) => state.shapes);
 export const useSelectedShapeIds = () => useDesignStore((state) => state.selectedShapeIds);
 export const useBoundingBoxes = () => useDesignStore((state) => state.boundingBoxes);
+export const useShapeLayer = () => useDesignStore((state) => state.shapeLayer);
