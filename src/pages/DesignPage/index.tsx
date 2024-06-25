@@ -1,15 +1,16 @@
 import styles from './styles.module.scss';
 
-import Toolbar from '@/components/Toolbar';
+import Header from '@/components/Header';
 import Canvas from '@/components/Canvas';
+import Sidebar from '@/components/Sidebar';
 
 const DesignPage = () => {
   return (
     <div className={styles.layout}>
-      <h1>KonvaStudy</h1>
+      <Header />
       <div className={styles.container}>
-        <Toolbar />
         <Canvas />
+        <Sidebar />
       </div>
     </div>
   );

@@ -1,0 +1,26 @@
+.layout {
+  flex-shrink: 0;
+
+  width: 100%;
+  height: 56px;
+  padding: 0 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: white;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.titlebar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  font-size: 16px;
+}
