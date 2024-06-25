@@ -17,29 +17,10 @@ const Toolbar = () => {
   const { konva } = useSelectedShapes();
 
   const updateAlign = (align: TextAlign) => {
-    const adjustX = (text: Konva.Text): number => {
-      const currentAlign = text.align() as TextAlign;
-      const width = text.width();
-
-      if (currentAlign === align) return text.x();
-
-      const adjustments: Record<string, number> = {
-        'left-center': width / 2,
-        'left-right': width,
-        'center-left': -width / 2,
-        'center-right': width / 2,
-        'right-left': -width,
-        'right-center': -width / 2,
-      };
-
-      return text.x() + (adjustments[`${currentAlign}-${align}`] || 0);
-    };
-
     const textAlignAttributes = konva.selectedShapes
       .filter((shape): shape is Konva.Text => shape instanceof Konva.Text)
       .map((shape) => ({
         id: shape.id(),
-        x: adjustX(shape),
         align,
       }));
 

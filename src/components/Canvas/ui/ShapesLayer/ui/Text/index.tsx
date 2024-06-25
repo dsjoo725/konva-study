@@ -16,28 +16,12 @@ const Text = ({ text }: Props) => {
   const { textRef, inputValue, handleBlur, handleFocus, handleKeyDown, handleChange } =
     useHandleText(text);
 
-  const alignOffset = (align: TextAlign) => {
-    if (!textRef.current) return 0;
-
-    switch (align) {
-      case 'left':
-        return 0;
-      case 'center':
-        return textRef.current.width() / 2;
-      case 'right':
-        return textRef.current.width();
-      default:
-        return 0;
-    }
-  };
-
   return (
     <>
       <KonvaText
         ref={textRef}
         {...text}
         fontStyle={text.fontStyle.length === 0 ? 'normal' : text.fontStyle.join(' ')}
-        offsetX={alignOffset(text.align)}
         lineHeight={1.2}
         draggable
         onDragEnd={handleDragEnd(text.id)}
@@ -49,7 +33,7 @@ const Text = ({ text }: Props) => {
           divProps={{
             style: {
               top: `${text.y * canvas.scale}px`,
-              left: `${text.x * canvas.scale - alignOffset(text.align) * canvas.scale}px`,
+              left: `${text.x * canvas.scale}px`,
             },
           }}
         >
