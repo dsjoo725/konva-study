@@ -1,4 +1,4 @@
-import { CircleConfig, RectangleConfig, TextConfig } from '@/shared/design/type';
+import { CircleConfig, LineConfig, RectangleConfig, TextConfig } from '@/shared/design/type';
 import { useDesignActions } from '@/shared/design/store';
 import { shapeFactory } from '@/shared/design/services/ShapeFactory';
 
@@ -20,5 +20,10 @@ export const useCreateShape = () => {
     addShapes([text]);
   };
 
-  return { createRectangle, createCircle, createText };
+  const createLine = (config: LineConfig) => {
+    const text = shapeFactory.createLine(config);
+    addShapes([text]);
+  };
+
+  return { createRectangle, createCircle, createText, createLine };
 };

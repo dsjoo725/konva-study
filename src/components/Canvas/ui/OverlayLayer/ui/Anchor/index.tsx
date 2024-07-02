@@ -1,7 +1,8 @@
 import Konva from 'konva';
 
-import { Rect } from 'react-konva';
+import { Circle, Rect } from 'react-konva';
 import { useHandleAnchor } from './hooks/useHandleAnchor';
+import { useHandleLineAnchor } from './hooks/useHandleLineAnchor';
 
 interface Props {
   name: string;
@@ -11,7 +12,24 @@ interface Props {
   scale: number;
 }
 const Anchor = ({ name, x, y, selectedShapes, scale }: Props) => {
-  const { handleDragMove } = useHandleAnchor(selectedShapes);
+  const { handleDragMove: handleDragMoveShape } = useHandleAnchor(selectedShapes);
+  const { handleDragMove: handleDragMoveLine } = useHandleLineAnchor(selectedShapes);
+
+  if (name === 'left' || name === 'right')
+    return (
+      <Circle
+        name={`${name}-anchor`}
+        x={x}
+        y={y}
+        radius={5 / scale}
+        stroke={'rgba(247, 107, 21, 1)'}
+        strokeWidth={2 / scale}
+        fill="white"
+        draggable
+        onDragMove={handleDragMoveLine}
+      />
+    );
+
   return (
     <Rect
       name={`${name}-anchor`}
@@ -26,7 +44,7 @@ const Anchor = ({ name, x, y, selectedShapes, scale }: Props) => {
       cornerRadius={1 / scale}
       fill="white"
       draggable
-      onDragMove={handleDragMove}
+      onDragMove={handleDragMoveShape}
     />
   );
 };

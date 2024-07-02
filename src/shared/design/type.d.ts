@@ -6,7 +6,7 @@ export type BaseShape = {
   rotation: number;
 };
 
-export type ShapeType = 'rectangle' | 'circle' | 'text';
+export type ShapeType = 'rectangle' | 'circle' | 'text' | 'line';
 
 export type RectangleShape = BaseShape & {
   shapeType: 'rectangle';
@@ -43,7 +43,15 @@ export type TextShape = BaseShape & {
 };
 export type TextConfig = Omit<TextShape, 'id' | 'shapeType'>;
 
-export type Shape = RectangleShape | CircleShape | TextShape;
+export type LineShape = BaseShape & {
+  shapeType: 'line';
+  points: number[];
+  stroke: 'black';
+  strokeWidth: number;
+};
+export type LineConfig = Omit<LineShape, 'id' | 'shapeType'>;
+
+export type Shape = RectangleShape | CircleShape | TextShape | LineShape;
 
 export type BoundingBox = {
   x: number;
@@ -51,4 +59,5 @@ export type BoundingBox = {
   width: number;
   height: number;
   rotation: number;
+  points?: number[];
 };

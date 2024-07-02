@@ -131,12 +131,25 @@ export const transformShapeAttributes = (
           fontSize: text.fontSize() * attrs.scaleX,
           rotation: attrs.rotation,
         };
+      case 'line':
+        const points = (shape as Konva.Line).points();
+
+        return {
+          id: shape.id(),
+          x: attrs.x - offsetX / 2,
+          y: attrs.y - offsetY / 2,
+          points: [
+            points[0] * attrs.scaleX,
+            points[1] * attrs.scaleY,
+            points[2] * attrs.scaleX,
+            points[3] * attrs.scaleY,
+          ],
+        };
       default:
         return {
           id: shape.id(),
           x: attrs.x - offsetX / 2,
           y: attrs.y - offsetY / 2,
-          rotation: attrs.rotation,
         };
     }
   });

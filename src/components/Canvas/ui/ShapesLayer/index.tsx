@@ -7,6 +7,7 @@ import Circle from './ui/Cirlce';
 import Text from './ui/Text';
 import Konva from 'konva';
 import { useEffect, useRef } from 'react';
+import Line from './ui/Line';
 
 interface Props {
   x: number;
@@ -33,6 +34,8 @@ const ShapesLayer = ({ x, y }: Props) => {
             return <Circle key={shape.id} circle={shape} />;
           case 'text':
             return <Text key={shape.id} text={shape} />;
+          case 'line':
+            return <Line key={shape.id} line={shape} />;
           default:
             return null;
         }

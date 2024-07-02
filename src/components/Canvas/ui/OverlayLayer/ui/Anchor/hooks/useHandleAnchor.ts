@@ -113,6 +113,7 @@ export const useHandleAnchor = (selectedShapes: Konva.Shape[]) => {
 
     const transform = calculateRelativeTransform(boundingBoxes[0], newBoundingBox);
     const newBoundingBoxes = transformBoundingBoxes(e, boundingBoxes, transform);
+    // 주어진 도형들의 위치, 크기 및 회전 각도를 주어진 변환 객체를 사용하여 업데이트합니다.
     const attrs = transformShapeAttributes(selectedShapes, transform);
 
     setBoundingBoxes(newBoundingBoxes);

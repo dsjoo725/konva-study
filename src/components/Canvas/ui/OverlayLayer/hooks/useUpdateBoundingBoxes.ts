@@ -50,6 +50,24 @@ export const useUpdateBoundingBoxes = (
       .map((id) => stageRef.current?.findOne(`#${id}`))
       .filter((node): node is Konva.Shape => node instanceof Konva.Shape);
 
+    // 선택된 도형이 선 한개일 때
+    if (
+      selectedShapesRef.current.length === 1 &&
+      selectedShapesRef.current[0] instanceof Konva.Line
+    ) {
+      setBoundingBoxes([
+        {
+          x: selectedShapesRef.current[0].x(),
+          y: selectedShapesRef.current[0].y(),
+          width: 0,
+          height: 0,
+          points: selectedShapesRef.current[0].points(),
+          rotation: selectedShapesRef.current[0].rotation(),
+        },
+      ]);
+      return;
+    }
+
     const combinePoints: Vector2d[] = [];
 
     // 각 도형의 변환된 경계 상자를 계산합니다.

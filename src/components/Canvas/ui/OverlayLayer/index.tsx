@@ -35,39 +35,60 @@ const OverlayLayer = ({ stageRef, x, y, scale }: Props) => {
         ))}
         {boundingBoxes[0] && (
           <Group x={boundingBoxes[0].x} y={boundingBoxes[0].y} rotation={boundingBoxes[0].rotation}>
-            <Anchor
-              name="top-left"
-              x={0}
-              y={0}
-              selectedShapes={selectedShapesRef.current}
-              scale={scale}
-            />
-            <Anchor
-              name="top-right"
-              x={boundingBoxes[0].width}
-              y={0}
-              selectedShapes={selectedShapesRef.current}
-              scale={scale}
-            />
-            <Anchor
-              name="bottom-left"
-              x={0}
-              y={boundingBoxes[0].height}
-              selectedShapes={selectedShapesRef.current}
-              scale={scale}
-            />
-            <Anchor
-              name="bottom-right"
-              x={boundingBoxes[0].width}
-              y={boundingBoxes[0].height}
-              selectedShapes={selectedShapesRef.current}
-              scale={scale}
-            />
-            <Rotater
-              boundingBox={boundingBoxes[0]}
-              selectedShapes={selectedShapesRef.current}
-              scale={scale}
-            />
+            {boundingBoxes[0].points ? (
+              <>
+                <Anchor
+                  name="left"
+                  x={boundingBoxes[0].points[0]}
+                  y={boundingBoxes[0].points[1]}
+                  selectedShapes={selectedShapesRef.current}
+                  scale={scale}
+                />
+                <Anchor
+                  name="right"
+                  x={boundingBoxes[0].points[2]}
+                  y={boundingBoxes[0].points[3]}
+                  selectedShapes={selectedShapesRef.current}
+                  scale={scale}
+                />
+              </>
+            ) : (
+              <>
+                <Anchor
+                  name="top-left"
+                  x={0}
+                  y={0}
+                  selectedShapes={selectedShapesRef.current}
+                  scale={scale}
+                />
+                <Anchor
+                  name="top-right"
+                  x={boundingBoxes[0].width}
+                  y={0}
+                  selectedShapes={selectedShapesRef.current}
+                  scale={scale}
+                />
+                <Anchor
+                  name="bottom-left"
+                  x={0}
+                  y={boundingBoxes[0].height}
+                  selectedShapes={selectedShapesRef.current}
+                  scale={scale}
+                />
+                <Anchor
+                  name="bottom-right"
+                  x={boundingBoxes[0].width}
+                  y={boundingBoxes[0].height}
+                  selectedShapes={selectedShapesRef.current}
+                  scale={scale}
+                />
+                <Rotater
+                  boundingBox={boundingBoxes[0]}
+                  selectedShapes={selectedShapesRef.current}
+                  scale={scale}
+                />
+              </>
+            )}
           </Group>
         )}
       </Group>

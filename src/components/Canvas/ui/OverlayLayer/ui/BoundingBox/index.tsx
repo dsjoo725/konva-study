@@ -1,4 +1,4 @@
-import { Rect } from 'react-konva';
+import { Line, Rect } from 'react-konva';
 import { BoundingBox as TBoundingBox } from '@/shared/design/type';
 
 interface Props {
@@ -7,6 +7,18 @@ interface Props {
   scale: number;
 }
 const BoundingBox = ({ index, boundingBox, scale }: Props) => {
+  if (boundingBox.points)
+    return (
+      <Line
+        x={boundingBox.x}
+        y={boundingBox.y}
+        points={boundingBox.points}
+        rotation={boundingBox.rotation}
+        stroke={'rgba(247, 107, 21, 0.5)'}
+        strokeWidth={10 / scale}
+      />
+    );
+
   return (
     <Rect
       name={`boundingBox-${index}`}

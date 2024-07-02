@@ -1,5 +1,8 @@
-import IconButton from '@/shared/@common/ui/IconButton';
+import { DownloadIcon, PencilIcon } from 'lucide-react';
+
 import styles from './styles.module.scss';
+
+import IconButton from '@/shared/@common/ui/IconButton';
 import {
   BarcodeIcon,
   CircleIcon,
@@ -8,22 +11,30 @@ import {
   RectangleIcon,
   TextIcon,
 } from '@/shared/@common/icons';
-import { DownloadIcon, PencilIcon } from 'lucide-react';
+import { useCreateShape } from '@/shared/design/hooks/useCreateShape';
+import {
+  DEFAULT_CIRCLE_CONFIG,
+  DEFAULT_LINE_CONFIG,
+  DEFAULT_RECTANGLE_CONFIG,
+  DEFAULT_TEXT_CONFIG,
+} from '@/shared/design/constant';
 
 const Header = () => {
+  const { createCircle, createRectangle, createText, createLine } = useCreateShape();
+
   return (
     <div className={styles.layout}>
       <div className={styles.toolbar}>
-        <IconButton>
+        <IconButton onClick={() => createRectangle(DEFAULT_RECTANGLE_CONFIG)}>
           <RectangleIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => createCircle(DEFAULT_CIRCLE_CONFIG)}>
           <CircleIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => createLine(DEFAULT_LINE_CONFIG)}>
           <LineIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => createText(DEFAULT_TEXT_CONFIG)}>
           <TextIcon />
         </IconButton>
         <IconButton>

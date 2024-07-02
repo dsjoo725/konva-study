@@ -1,11 +1,15 @@
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './styles.module.scss';
 
-interface Props {
+interface Props extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
   children: ReactNode;
 }
-const IconButton = ({ children }: Props) => {
-  return <button className={styles.layout}>{children}</button>;
+const IconButton = ({ children, ...props }: Props) => {
+  return (
+    <button className={styles.layout} {...props}>
+      {children}
+    </button>
+  );
 };
 
 export default IconButton;

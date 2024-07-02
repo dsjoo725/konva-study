@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   CircleConfig,
   CircleShape,
+  LineConfig,
+  LineShape,
   RectangleConfig,
   RectangleShape,
   TextConfig,
@@ -42,6 +44,14 @@ class ShapeFactory {
       id: uuidv4(),
       shapeType: 'text',
       ...text,
+    };
+  }
+
+  public createLine(line: LineConfig): LineShape {
+    return {
+      id: uuidv4(),
+      shapeType: 'line',
+      ...line,
     };
   }
 }
